@@ -1,0 +1,51 @@
+.detail-modal {
+  position: relative;
+  min-height: 10rem;
+  max-height: 50rem;
+  width: 70rem;
+  z-index: 100;
+  border: none;
+  border-radius: 1rem;
+  padding: 1.5rem;
+  background-color: black;
+  display: none !important;
+
+  .dialog-header {
+    display: flex;
+    align-items: center;
+    height: 8rem;
+    width: 100%;
+    gap: 2rem;
+    font-size: 2rem;
+    border-bottom: 0.2rem solid rgba(224, 224, 224, 0.514);
+
+    .dialog-actions {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 1rem;
+      height: inherit;
+      margin-left: auto;
+
+      button {
+        background-color: transparent;
+
+        i {
+          font-size: 1.9rem;
+          cursor: pointer;
+        }
+      }
+    }
+  }
+
+  main {
+      padding: 2rem 0;
+      font-size: 2rem;
+  }
+}
+
+.d-loading {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}

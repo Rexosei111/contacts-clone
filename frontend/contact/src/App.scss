@@ -1,0 +1,30 @@
+.App {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+}
+
+.main {
+    height: calc(100vh - 9vh - 0.5rem);
+    display: flex;
+    gap: 2rem;
+}
+
+.dialog-backdrop {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    background-color: rgba(0, 0, 0, 0.527);
+    z-index: 4;
+    visibility: hidden;
+}
+
+.dialog-open {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    visibility: visible;
+}

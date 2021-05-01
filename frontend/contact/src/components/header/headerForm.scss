@@ -1,0 +1,31 @@
+.search-form {
+    background-color: rgba(235, 235, 235, 0.678);
+    width: 70rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 100%;
+    border-radius: 0.5rem;
+
+    .btn-submit {
+        height: inherit;
+        width: 10%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        background-color: royalblue;
+        border-radius: inherit;
+
+        i {
+            color: white;
+        }
+    }
+    .search-inp {
+        width: 90%;
+        height: inherit;
+        background-color: transparent;
+        border: none;
+        padding: 0 1rem;
+        border-radius: inherit;
+    }
+}
