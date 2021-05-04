@@ -18,6 +18,7 @@ export default function UploadButton({setuserImage}) {
   const classes = useStyles();
 
   const userImageHandler = (e) => {
+    console.log(e.target.value)
     setuserImage(e.target.value)
 }
 

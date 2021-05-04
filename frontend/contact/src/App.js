@@ -7,6 +7,9 @@ import Sidebar from "./components/sideBar/sidebar";
 import axios from "axios";
 import FormDialog from "./components/main/FormDialog";
 import CreateModal from './components/sideBar/createModal'
+import Login from './components/login/login'
+
+// TODO -> CREATE A LOGIN AND REGISTER PAGE
 
 function App() {
   const [Contacts, setContacts] = useState([]);
@@ -21,7 +24,7 @@ function App() {
       .get("http://localhost:8000/api/contacts/")
       .then((response) => {
         setloading(false);
-        Contacts && setContacts(response.data);
+        setContacts(response.data);
       })
       .catch((error) => {
         settoastOpen(true)
@@ -40,7 +43,7 @@ function App() {
             setClickedContact={setClickedContact}
             openCreate={openCreate}
           />
-          <CreateModal openCreate={openCreate} setContacts={setContacts} setopenCreate={setopenCreate}/>
+          <CreateModal openCreate={openCreate} setContacts={setContacts} Contacts={Contacts} setopenCreate={setopenCreate}/>
         </div>
         <Header />
         <div className="main">

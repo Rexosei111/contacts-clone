@@ -10,16 +10,16 @@ function FormDialog({ open, setOpen, clickedContact, openCreate }) {
 
   useEffect(() => {
     // make an api call to get the clicked Contact
-    axios
-      .get(`http://localhost:8000/api/contacts/${clickedContact}/`)
-      .then((response) => {
-        setContact(response.data);
-        setLoading(false);
-      })
-      .catch((error) => {
-        console.log(error);
-        setOpen(false);
-      });
+    // axios
+    //   .get(`http://localhost:8000/api/contacts/${clickedContact}/`)
+    //   .then((response) => {
+    //     setContact(response.data);
+    //     setLoading(false);
+    //   })
+    //   .catch((error) => {
+    //     console.log(error);
+    //     setOpen(false);
+    //   });
   }, []);
   console.log(clickedContact);
   return (
