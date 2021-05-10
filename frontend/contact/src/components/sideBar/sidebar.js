@@ -2,7 +2,7 @@ import React from 'react'
 import {NavLink} from 'react-router-dom'
 import './sidebar.scss'
 
-function sidebar({contacts, setopenCreate, setOpen,openCreate}) {
+function Sidebar({contacts, setopenCreate, setOpen,openCreate}) {
     const num_of_contacts = contacts.length
 
     const createHandler = (e) => {
@@ -75,4 +75,4 @@ function sidebar({contacts, setopenCreate, setOpen,openCreate}) {
     )
 }
 
-export default sidebar
+export default Sidebar

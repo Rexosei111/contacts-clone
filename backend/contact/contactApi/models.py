@@ -42,7 +42,7 @@ class Contact(models.Model):
 
 class PhoneNumber(models.Model):
     phone = models.CharField(max_length=15)
-    contact = models.ForeignKey(Contact, on_delete=models.CASCADE, related_name = 'phoneNumber')
+    contact = models.ForeignKey(Contact, on_delete=models.CASCADE, related_name = 'phone_number')
 
     def __str__(self):
         return " "

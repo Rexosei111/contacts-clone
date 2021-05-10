@@ -21,7 +21,6 @@ function FormDialog({ open, setOpen, clickedContact, openCreate }) {
     //     setOpen(false);
     //   });
   }, []);
-  console.log(clickedContact);
   return (
     <dialog
       open={open}

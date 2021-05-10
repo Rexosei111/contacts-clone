@@ -1,70 +1,82 @@
 import React, { useState } from "react";
+import {Link, useHistory} from "react-router-dom"
 import axios from "axios";
+import "./login.scss";
 
-function Login({token, setToken }) {
+function Login({token, setToken}) {
+  const history = useHistory()
+    history.push("/login")
+    
+  const [error, setError] = useState("")
   const [formData, setFormData] = useState({
     username: "",
-    email: "",
     password: "",
-    password2: "",
   });
 
   const handleChange = (e) => {
-    const {name, value} = e.target;
+    const { name, value } = e.target;
     setFormData((prevState) => ({
       ...prevState,
       [name]: value,
-    }));
+    })
+    );
+    setError("")
   };
-  function getCookie(name) {
-    let cookieValue = null;
-    if (document.cookie && document.cookie !== "") {
-      const cookies = document.cookie.split(";");
-      for (let i = 0; i < cookies.length; i++) {
-        const cookie = cookies[i].trim();
-        // Does this cookie string begin with the name we want?
-        if (cookie.substring(0, name.length + 1) === name + "=") {
-          cookieValue = decodeURIComponent(cookie.substring(name.length + 1));
-          break;
-        }
-      }
-    }
-    return cookieValue;
-  }
 
-    axios.defaults.xsrfCookieName = "csrftoken";
-    axios.defaults.xsrfHeaderName = "X-CSRFToken";
-    let csrf_token = getCookie('csrftoken')
-    
-  const handleSubmit = (e) => {
-      e.preventDefault();
-      axios({
-        method: "post",
-        url: "http://localhost:8000/api/register/",
-        data: formData,
-        headers: {
-          "Content-type": "application/json",
-        },
-      })
-      .then(response => {
-          sessionStorage.setItem("token", response.data)
-          setToken(response.data)
-          console.log(response.data)
-      })
-      .catch(error => console.log(error))
-    }
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    const {data} = await axios({
+      method: "post",
+      url: "http://localhost:8000/api/login/",
+      data: formData,
+      headers: {
+        "Content-type": "application/json",
+      },
+    })
+    const {token, email} = data;
+    setToken(token, email)
+      // .then((response) => {
+      //   const token = response.data['token'];
+      //   const email = response.data['email']
+      //   if (token) {
+      //     setToken(token, email);
+      //   }
+      // })
+      // .catch((error) => 
+      //   setError("One of your credentials is incorrect")
+      // )
+  };
 
   return (
     <div className="login" onSubmit={handleSubmit}>
-      <form className="loginForm" method="post">
-        <input name="username" type="text" placeholder="username" onChange={handleChange}/>
-        <input name="email" type="email" placeholder="email" onChange={handleChange}/>
-        <input name="password" type="password" placeholder="password" onChange={handleChange} />
-        <input name="password2" type="password" placeholder="confirmation" onChange={handleChange}/>
-        <button type="submit">Submit</button>
-      </form>
+      <div className="login-form-div">
+        <i className="material-icons">account_circle</i>
+        <h1 className="log-header">Please Login</h1>
+        {error ? <div className="form-errors">
+          <ul>
+            <li className="error">{error}</li>
+          </ul>
+        </div> : null}
+        <form className="loginForm" method="post">
+          <input
+            name="username"
+            type="text"
+            placeholder="username"
+            onChange={handleChange}
+          />
+          <input
+            name="password"
+            type="password"
+            placeholder="password"
+            onChange={handleChange}
+          />
+          <button type="submit" className="btn-submit">
+            login
+          </button>
+        </form>
+        <Link to="/register">- Create An Account -</Link>
 
-      <div>token === {token}</div>
+      </div>
     </div>
   );
 }

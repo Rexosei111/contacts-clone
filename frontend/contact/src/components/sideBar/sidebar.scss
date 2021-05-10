@@ -73,3 +73,26 @@
 aside.close {
     display: none;
 }
+
+@media screen and (max-width: 980px) {
+    aside {
+        position: fixed;
+        height: 100%;
+        width: 25rem !important;
+        background-color: white;
+        z-index: 3;
+        box-shadow: 0.1rem 0 0.5rem grey;
+    }
+
+    aside.close {
+        display: none;
+    }
+
+    .create {
+        display: none !important;
+    }
+
+    .fab {
+        display: initial !important;
+    }
+}

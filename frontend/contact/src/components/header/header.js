@@ -2,7 +2,7 @@ import React from 'react'
 import HeaderForm from './headerForm'
 import './header.scss'
 
-function header() {
+function header({email, token, Contacts, setContacts}) {
     const humbHandler = (e) => {
         const side = document.querySelector('aside')
         side.classList.toggle('close')
@@ -17,13 +17,13 @@ function header() {
                         <a href="/" className="app-name">Contacts</a>
                     </div>
                 </div>
-                <HeaderForm />
+                <HeaderForm token={token} Contacts={Contacts} setContacts={setContacts}/>
                 <div className="right">
                     <i className="material-icons">help_outline</i>
                     <i className="material-icons">settings</i>
                     <button className="apps"><i className="material-icons">apps</i></button>
                     <div className="user-info">
-                        <div className="user">S</div>
+                        <div className="user">{email ? email[0].toUpperCase() : 'S'}</div>
                     </div>
                 </div>
             </nav>

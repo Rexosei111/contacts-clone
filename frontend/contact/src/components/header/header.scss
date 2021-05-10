@@ -57,8 +57,8 @@
 
             .apps {
                 margin-left: auto;
-                height: 4rem;
-                width: 4rem;
+                height: 5rem;
+                width: 5rem;
                 border-radius: 50%;
                 display: flex;
                 align-items: center;
@@ -116,3 +116,22 @@ button {
     align-items: center;
 }
  
+
+@media screen and (max-width: 510px) {
+    .left {
+        .app-logo > i {
+            display: none;
+        }
+    }
+
+    .right {
+        i {
+            display: none;
+        }
+
+        .apps {
+            display: none !important;
+        }
+    }
+
+}

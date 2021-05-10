@@ -5,11 +5,11 @@ import Loading from './loading'
 import Toast from './toast'
 
 
-function Main({contacts, loading, open, setOpen, setClickedContact, toastopen, settoastOpen}) {
+function Main({contacts, loading, open, setOpen, setClickedContact, toastopen, settoastOpen, token, setContacts}) {
    
     return (
         <main className={loading ? 'loading' : null}>
-            {loading ? <Loading /> : <div className="contact-table"><Table contacts={contacts} setOpen={setOpen} setClickedContact={setClickedContact} /></div>}
+            {loading ? <Loading /> : <div className="contact-table"><Table token={token} setContacts={setContacts} contacts={contacts} setOpen={setOpen} setClickedContact={setClickedContact} /></div>}
             <Toast toastopen={toastopen} settoastOpen={settoastOpen} />
             
             <button className="fab">
