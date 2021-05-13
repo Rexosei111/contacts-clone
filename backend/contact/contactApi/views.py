@@ -1,5 +1,4 @@
 from rest_framework import status
-from django.shortcuts import get_object_or_404
 from rest_framework.response import Response
 from rest_framework.decorators import api_view, permission_classes, parser_classes
 from rest_framework.authtoken.views import ObtainAuthToken
@@ -9,7 +8,6 @@ from rest_framework.permissions import IsAuthenticated
 from rest_framework.authentication import TokenAuthentication
 from django.contrib.auth.models import User
 from rest_framework import generics, filters
-import json
 from .models import *
 from .serializers import *
 
@@ -20,7 +18,7 @@ class ContactListView(generics.ListAPIView):
     serializer_class = ContactSerializer
     permission_classes = [IsAuthenticated]
     filter_backends = [filters.SearchFilter]
-    search_fields = ['first_name', 'last_name', 'email', 'phone_number__phone']
+    search_fields = ['first_name', 'last_name', 'email', 'phone']
 
     def get_queryset(self):
         # queryset = super(ContactListView, self).get_queryset()
@@ -34,6 +32,7 @@ class ContactListView(generics.ListAPIView):
 @parser_classes([MultiPartParser, FormParser])
 def CreateContactView(request):
     user = request.user
+    print(request.data)
     contact = Contact(user=user)
     serializer = ContactSerializer(contact, data=request.data)
     if serializer.is_valid():

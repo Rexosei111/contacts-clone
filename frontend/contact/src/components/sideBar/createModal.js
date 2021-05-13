@@ -11,7 +11,7 @@ function CreateModal({
   token,
 }) {
   const [userImage, setuserImage] = useState();
-  const [phone_number, setphone] = useState([]);
+  const [phone, setphone] = useState();
   let [createFormData, setCreateFormData] = useState({
     first_name: "",
     last_name: "",
@@ -19,14 +19,9 @@ function CreateModal({
     email: "",
   });
 
-  console.log(userImage);
-
-  const phoneChange = (e) => {
-    const number = e.target.value
-    setphone((prevState) => (
-      [...prevState, {"phone": number}]
-    ));
-  };
+  const handlePhone = (e) => {
+    setphone(e.target.value)
+  }
   const handleChange = (e) => {
     const { name, value } = e.target;
     setCreateFormData((prevState) => ({
@@ -42,14 +37,13 @@ function CreateModal({
     formData.append("last_name", createFormData.last_name);
     formData.append("job", createFormData.job);
     formData.append("email", createFormData.email);
-    formData.append("phone_number", JSON.stringify(phone_number[0]));
-    // const data = { ...createFormData, phone_number: [{ phone: `${phone}` }], image: `${userImage}` };
+    formData.append("phone", phone);
     axios({
       method: "post",
       url: "http://localhost:8000/api/contacts/create/",
       data: formData,
       headers: {
-        "Content-Type": "multipart/form-data",
+        // "Content-Type": "multipart/form-data",
         Authorization: `Token ${token}`,
       },
     })
@@ -145,10 +139,10 @@ function CreateModal({
               </div>
               <input
                 type="text"
-                name="phoneNumber"
-                placeholder="Phone"
-                value={createFormData["phoneNumber"]}
-                onChange={phoneChange}
+                name="phone"
+                placeholder="Phone Number"
+                value={phone}
+                onChange={handlePhone}
               ></input>
               <button className="btn-close">
                 <i className="material-icons">close</i>

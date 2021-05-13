@@ -1,4 +1,5 @@
 from rest_framework import serializers
+from phonenumber_field.serializerfields import PhoneNumberField
 from drf_writable_nested.serializers import WritableNestedModelSerializer
 from django.contrib.auth.models import User
 from rest_framework.response import Response
@@ -6,8 +7,8 @@ from rest_framework import status
 from .models import *
 
 
-class ContactSerializer(WritableNestedModelSerializer):
-
+class ContactSerializer(serializers.ModelSerializer):
+    phone = PhoneNumberField()
     class Meta:
         model = Contact
         fields = [

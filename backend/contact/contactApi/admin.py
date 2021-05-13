@@ -11,7 +11,7 @@ class ContactAdmin(admin.ModelAdmin):
         }),
         ('More Info', {
             'fields': (
-                'email', 'date_of_birth', 'job', 'favorite'
+                'email','phone', 'date_of_birth', 'job', 'favorite'
             ), 'classes': ['collapse']
         })
     )

@@ -70,9 +70,7 @@ function table({ contacts, setOpen, setClickedContact, token, setContacts}) {
               </td>
               <td className="email">{contact.email}</td>
               <td className="phone">
-                {contact.phone_number.length > 0
-                  ? contact.phone_number[0].phone
-                  : null}
+                {contact.phone}
               </td>
               <td className="job">{contact.job}</td>
               <td>
