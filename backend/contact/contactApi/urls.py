@@ -2,7 +2,7 @@ from django.urls import path
 from .views import (
     ContactListView, CreateContactView, 
     ContactDetailView, UserRegistrationView,
-    ContactUpdateView, ContactDeleteView, GetUserToken
+    ContactUpdateView, ContactDeleteView, GetUserToken,
 ) 
 from rest_framework.authtoken import views as auth_views
 
@@ -16,5 +16,6 @@ urlpatterns = [
     path('contacts/<int:pk>/delete/', ContactDeleteView, name="delete"),
     path('register/', UserRegistrationView, name="register"),
     path('login/', GetUserToken.as_view(), name="login"),
+    # path('log/', Auth, name='log')
 ]
 

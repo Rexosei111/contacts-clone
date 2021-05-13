@@ -2,10 +2,6 @@ from django.contrib import admin
 from .models import *
 # Register your models here.
 
-class PhoneNumberInline(admin.TabularInline):
-    model = PhoneNumber
-    extra = 2
-
 class ContactAdmin(admin.ModelAdmin):
     fieldsets = (
         (None, {
@@ -19,7 +15,6 @@ class ContactAdmin(admin.ModelAdmin):
             ), 'classes': ['collapse']
         })
     )
-    inlines = [PhoneNumberInline]
 
 admin.site.register(Contact, ContactAdmin)
 

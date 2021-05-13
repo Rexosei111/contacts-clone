@@ -28,6 +28,7 @@ class Contact(models.Model):
     last_name = models.CharField(max_length=50, null=True, blank=True)
     email = models.EmailField(null=True, blank=True)
     image = models.ImageField(upload_to="contact-images", null=True, blank=True)
+    phone = models.CharField(max_length=15, null=True, blank=True)
     date_of_birth = models.DateField(null=True, blank=True)
     job = models.CharField(max_length=50, null=True, blank=True)
     favorite = models.BooleanField(default=False, null=True, blank=True)
@@ -39,10 +40,3 @@ class Contact(models.Model):
     def __str__(self):
         return f"{self.first_name} {self.last_name}"
 
-
-class PhoneNumber(models.Model):
-    phone = models.CharField(max_length=15)
-    contact = models.ForeignKey(Contact, on_delete=models.CASCADE, related_name = 'phone_number')
-
-    def __str__(self):
-        return " "

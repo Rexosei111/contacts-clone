@@ -11,19 +11,21 @@ function CreateModal({
   token,
 }) {
   const [userImage, setuserImage] = useState();
-  const [phone, setphone] = useState("");
+  const [phone_number, setphone] = useState([]);
   let [createFormData, setCreateFormData] = useState({
-    user: "",
     first_name: "",
     last_name: "",
     job: "",
     email: "",
   });
 
-  console.log(userImage)
-  
+  console.log(userImage);
+
   const phoneChange = (e) => {
-    setphone(e.target.value);
+    const number = e.target.value
+    setphone((prevState) => (
+      [...prevState, {"phone": number}]
+    ));
   };
   const handleChange = (e) => {
     const { name, value } = e.target;
@@ -34,13 +36,18 @@ function CreateModal({
   };
   const submitHandler = (e) => {
     e.preventDefault();
-    // console.log({...createFormData, 'phone_number': [{'phone': `${phone}`}]})
-    const data = { ...createFormData, phone_number: [{ phone: `${phone}` }], image: `${userImage}` };
-    console.log(data)
+    let formData = new FormData();
+    formData.append("image", userImage, userImage.name);
+    formData.append("first_name", createFormData.first_name);
+    formData.append("last_name", createFormData.last_name);
+    formData.append("job", createFormData.job);
+    formData.append("email", createFormData.email);
+    formData.append("phone_number", JSON.stringify(phone_number[0]));
+    // const data = { ...createFormData, phone_number: [{ phone: `${phone}` }], image: `${userImage}` };
     axios({
       method: "post",
       url: "http://localhost:8000/api/contacts/create/",
-      data: data,
+      data: formData,
       headers: {
         "Content-Type": "multipart/form-data",
         Authorization: `Token ${token}`,

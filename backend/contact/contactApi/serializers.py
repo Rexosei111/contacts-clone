@@ -6,22 +6,14 @@ from rest_framework import status
 from .models import *
 
 
-class PhoneNumberSerializer(serializers.ModelSerializer):
-
-    class Meta:
-        model = PhoneNumber
-        fields = ('id', 'phone')
-
-
 class ContactSerializer(WritableNestedModelSerializer):
-    phone_number = PhoneNumberSerializer(many=True)
 
     class Meta:
         model = Contact
         fields = [
             'id', 'first_name',
             'last_name', 'email', 'image', 'date_of_birth',
-            'job', 'phone_number', 'favorite'
+            'job', 'phone', 'favorite'
         ]
 
 
