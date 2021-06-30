@@ -32,7 +32,6 @@ class ContactListView(generics.ListAPIView):
 @parser_classes([MultiPartParser, FormParser])
 def CreateContactView(request):
     user = request.user
-    print(request.data)
     contact = Contact(user=user)
     serializer = ContactSerializer(contact, data=request.data)
     if serializer.is_valid():
@@ -68,10 +67,28 @@ def ContactDeleteView(request, pk):
         return Response({"success": "Contact Deleted Succesfully"}, status=status.HTTP_200_OK)
     return Response({"error": "You are Unathorized to delete this contact"}, status=status.HTTP_401_UNAUTHORIZED)
 
+@api_view(['PUT'])
+@permission_classes([IsAuthenticated])
+def FavoriteContact(request, pk):
+    user = request.user
+    try:
+        contact = Contact.objects.get(pk=pk)
+    except Contact.DoesNotExist:
+        return Response({"message": "Contact Not Found"}, status=status.HTTP_404_NOT_FOUND)
+
+    print(contact.favorite)
+    if contact.favorite:
+        contact.favorite = False
+        contact.save()
+    else:
+        contact.favorite = True
+        contact.save()
+        return Response({"success": "Update Successful"}, status=status.HTTP_200_OK)
+    return Response({"error": "Update Unsuccesful"})
 
 @api_view(["PUT"])
 @permission_classes([IsAuthenticated])
-@parser_classes([MultiPartParser, FormParser])
+# @parser_classes([MultiPartParser, FormParser])
 def ContactUpdateView(request, pk):
     try:
         contact = Contact.objects.get(pk=pk)

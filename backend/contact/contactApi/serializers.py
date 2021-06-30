@@ -8,7 +8,6 @@ from .models import *
 
 
 class ContactSerializer(serializers.ModelSerializer):
-    phone = PhoneNumberField()
     class Meta:
         model = Contact
         fields = [

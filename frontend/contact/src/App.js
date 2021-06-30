@@ -1,17 +1,17 @@
 import React from 'react'
-import Authenticated from './Authenticated'
-import Unauthenticated from './UnAuthenticated'
-import useToken from './useToken'
+// import useToken from './useToken'
+import TopNav from './components/TopNav/TopNav'
+import SideBar from './components/SideNav/SideBar'
+import { CssBaseline } from "@material-ui/core"
 
 function App() {
-  const {token, setToken} = useToken()
   
-  if(!token) {
-    return <Unauthenticated token={token} setToken={setToken}/>
-  }
-
   return (
-      <Authenticated token={token} />
+    <div>
+      <CssBaseline />
+      <TopNav />
+      <SideBar />
+    </div>
   )
 }
 
