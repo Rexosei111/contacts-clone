@@ -1,8 +1,8 @@
 import React from 'react'
 // import useToken from './useToken'
 import TopNav from './components/TopNav/TopNav'
-import SideBar from './components/SideNav/SideBar'
 import { CssBaseline } from "@material-ui/core"
+import Main from './components/Main/Main'
 
 function App() {
   
@@ -10,7 +10,7 @@ function App() {
     <div>
       <CssBaseline />
       <TopNav />
-      <SideBar />
+      <Main />
     </div>
   )
 }
