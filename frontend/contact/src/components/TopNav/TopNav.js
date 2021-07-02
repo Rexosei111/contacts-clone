@@ -7,7 +7,7 @@ import ContactIcon from "@material-ui/icons/AccountCircleRounded";
 import SearchBar from "./Search";
 import RightSIde from "./RightSIde";
 
-function TopNav() {
+function TopNav({setfullSide, fullSide}) {
   const useStyles = makeStyles(theme => ({
     appbar: {
       backgroundColor: "#ffffff",
@@ -37,7 +37,7 @@ function TopNav() {
       <AppBar position="static" elevation={0} className={classes.appbar}>
         <ToolBar className={classes.toolbar}>
           <div className={classes.leftSide}>
-            <IconButton edge="start" arial-label="Menu">
+            <IconButton edge="start" arial-label="Menu" onClick={() => setfullSide(!fullSide)}>
               <MenuIcon />
             </IconButton>
             <ContactIcon fontSize="large" className={classes.account} />

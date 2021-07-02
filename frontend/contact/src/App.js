@@ -1,18 +1,24 @@
-import React from 'react'
+import React from "react";
 // import useToken from './useToken'
-import TopNav from './components/TopNav/TopNav'
-import { CssBaseline } from "@material-ui/core"
-import Main from './components/Main/Main'
+import { CssBaseline } from "@material-ui/core";
+import Main from "./components/Main/Main";
+import { Route, Switch } from "react-router-dom";
+import Layout from "./components/Layout";
 
 function App() {
-  
   return (
-    <div>
+    <Layout>
       <CssBaseline />
-      <TopNav />
-      <Main />
-    </div>
-  )
+      <Switch>
+        <Route exact path="/">
+          <Main />
+        </Route>
+        <Route path="/frequent">
+          <Main />
+        </Route>
+      </Switch>
+    </Layout>
+  );
 }
 
-export default App
+export default App;

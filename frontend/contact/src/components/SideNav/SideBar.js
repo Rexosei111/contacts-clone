@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { Button, IconButton } from "@material-ui/core";
+import { Button} from "@material-ui/core";
 import List from "@material-ui/core/List";
 import ListItem from "@material-ui/core/ListItem";
 import ListItemIcon from "@material-ui/core/ListItemIcon";
@@ -21,27 +21,37 @@ import { Paper } from "@material-ui/core";
 import { makeStyles } from "@material-ui/core/styles";
 import AddIcon from "@material-ui/icons/Add";
 import PersonOutlineIcon from "@material-ui/icons/PersonOutline";
+import { NavLink } from 'react-router-dom'
 
-function SideBar() {
+function SideBar({fullSide}) {
   const [label, setlabel] = useState(true);
   const useStyle = makeStyles((theme) => ({
+
     paper: {
       width: 280,
       height: "100vh",
       position: "fixed",
+      left: fullSide ? 0 : -280
     },
     create: {
       height: 50,
       borderRadius: 40,
       backgroundColor: "#ffffff",
       color: "#5f6368",
-      margin: "10px 5px",
+      margin: "20px 5px",
       padding: "0 25px",
     },
     listitem: {
       borderRadius: "0 30px 30px 0",
       padding: "5px 25px",
+      '&.active': {
+        backgroundColor: '#e8f0fe',
+        color: '#1967d2'
+      }
     },
+    actionIcons: {
+      color: "#5f6368"
+    }
   }));
   const classes = useStyle();
 
@@ -59,21 +69,21 @@ function SideBar() {
         Create Contact
       </Button>
       <List dense={true} className={classes.list}>
-        <ListItem button component="a" href="#" className={classes.listitem}>
+        <ListItem button component={NavLink} to="/" className={classes.listitem}>
           <ListItemIcon>
-            <PersonOutlineIcon />
+            <PersonOutlineIcon fontSize="small" />
           </ListItemIcon>
           <ListItemText>Contacts</ListItemText>
         </ListItem>
-        <ListItem button component="a" href="#" className={classes.listitem}>
+        <ListItem button component={NavLink} to="/frequent" className={classes.listitem}>
           <ListItemIcon>
-            <HistoryIcon />
+            <HistoryIcon fontSize="small"/>
           </ListItemIcon>
           <ListItemText>Frequently Contacted</ListItemText>
         </ListItem>
         <ListItem button component="a" href="#" className={classes.listitem}>
           <ListItemIcon>
-            <AssistantOutlinedIcon />
+            <AssistantOutlinedIcon fontSize="small"/>
           </ListItemIcon>
           <ListItemText>Merge and Fix</ListItemText>
         </ListItem>
@@ -88,7 +98,7 @@ function SideBar() {
           onClick={handleLabel}
         >
           <ListItemIcon>
-            {label ? <ExpandLessOutlinedIcon /> : <ExpandMoreOutlinedIcon />}
+            {label ? <ExpandLessOutlinedIcon fontSize="small"/> : <ExpandMoreOutlinedIcon fontSize="small"/>}
           </ListItemIcon>
           <ListItemText>Label</ListItemText>
         </ListItem>
@@ -101,11 +111,11 @@ function SideBar() {
               className={classes.listitem}
             >
               <ListItemIcon>
-                <LabelOutlinedIcon />
+                <LabelOutlinedIcon fontSize="small"/>
               </ListItemIcon>
               <ListItemText primary="ICE" />
-              <EditOutlinedIcon />
-              <DeleteOutlineOutlinedIcon />
+              <EditOutlinedIcon fontSize="small" className={classes.actionIcons}/>
+              <DeleteOutlineOutlinedIcon fontSize="small" className={classes.actionIcons}/>
             </ListItem>
             <ListItem
               button
@@ -114,7 +124,7 @@ function SideBar() {
               className={classes.listitem}
             >
               <ListItemIcon>
-                <AddIcon />
+                <AddIcon fontSize="small"/>
               </ListItemIcon>
               <ListItemText>Create Label</ListItemText>
             </ListItem>
@@ -125,19 +135,19 @@ function SideBar() {
       <List dense={true} className={classes.list}>
         <ListItem button component="a" href="#" className={classes.listitem}>
           <ListItemIcon>
-            <PublishOutlinedIcon />
+            <PublishOutlinedIcon fontSize="small"/>
           </ListItemIcon>
           <ListItemText>Import</ListItemText>
         </ListItem>
         <ListItem button component="a" href="#" className={classes.listitem}>
           <ListItemIcon>
-            <BackupOutlinedIcon />
+            <BackupOutlinedIcon fontSize="small"/>
           </ListItemIcon>
           <ListItemText>Export</ListItemText>
         </ListItem>
         <ListItem button component="a" href="#" className={classes.listitem}>
           <ListItemIcon>
-            <PrintOutlinedIcon />
+            <PrintOutlinedIcon fontSize="small"/>
           </ListItemIcon>
           <ListItemText>Print</ListItemText>
         </ListItem>
@@ -146,13 +156,13 @@ function SideBar() {
       <List dense={true} className={classes.list}>
         <ListItem button component="a" href="#" className={classes.listitem}>
           <ListItemIcon>
-            <AssignmentReturnedOutlinedIcon />
+            <AssignmentReturnedOutlinedIcon fontSize="small"/>
           </ListItemIcon>
           <ListItemText>Other Contacts</ListItemText>
         </ListItem>
         <ListItem button component="a" href="#" className={classes.listitem}>
           <ListItemIcon>
-            <DeleteOutlineOutlinedIcon />
+            <DeleteOutlineOutlinedIcon fontSize="small"/>
           </ListItemIcon>
           <ListItemText>Bin</ListItemText>
         </ListItem>
