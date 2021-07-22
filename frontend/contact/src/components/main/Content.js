@@ -53,6 +53,12 @@ const useStyles = makeStyles({
       "& span": {
         visibility: "visible",
       },
+      "& div": {
+        display: "none"
+      },
+      "& span:first-child": {
+        display: "flex"
+      }
     },
   },
   tablecell: {
@@ -75,15 +81,12 @@ const useStyles = makeStyles({
   checkbox: {
     width: 32,
     height: 32,
+    display: "none"
   },
 });
 
-function Content() {
+function Content({ contacts }) {
   const classes = useStyles();
-  const [changed, setChanged] = useState(false);
-
-  const handleHover = () => setChanged(true);
-  const handleLeave = () => setChanged(false);
 
   return (
     <Paper className={classes.root} elevation={0}>
@@ -104,47 +107,55 @@ function Content() {
             </TableRow>
           </TableHead>
           <TableBody>
-            <TableRow
-              hover
-              role="checkbox"
-              tabIndex={-1}
-              className={classes.tablerow}
-              onMouseEnter={handleHover}
-              onMouseLeave={handleLeave}
-            >
-              <TableCell
-                className={clsx({
-                  [classes.name]: true,
-                  [classes.tablecell]: true,
-                })}
-                padding="normal"
-              >
-                {changed ? (
-                  <Checkbox className={classes.checkbox} />
-                ) : (
-                  <AccountAvartar />
-                )}
-                <Typography component="span">Rex osei</Typography>
-              </TableCell>
-              <TableCell align="center" className={classes.tablecell}>
-                rexosei111@gmail.com
-              </TableCell>
-              <TableCell align="center" className={classes.tablecell}>
-                0557570564
-              </TableCell>
-              <TableCell align="center" className={classes.tablecell}>
-                ............
-              </TableCell>
-              <TableCell
-                align="right"
-                className={clsx({
-                  [classes.tablecell]: true,
-                })}
-                padding="none"
-              >
-                <Actions />
-              </TableCell>
-            </TableRow>
+            {contacts.map((contact) => {
+              return (
+                <TableRow
+                  key={contact.id}
+                  hover
+                  role="checkbox"
+                  tabIndex={-1}
+                  className={classes.tablerow}
+                >
+                  <TableCell
+                    className={clsx({
+                      [classes.name]: true,
+                      [classes.tablecell]: true,
+                    })}
+                    padding="normal"
+                  >
+                      <Checkbox className={classes.checkbox} />
+                      <AccountAvartar link={contact.image} />
+
+                    {/* {changed ? (
+                      <Checkbox className={classes.checkbox} />
+                    ) : (
+                      <AccountAvartar link={contact.image} />
+                    )} */}
+                    <Typography component="span" variant="body2">{`${
+                      contact.first_name + " " + contact.last_name
+                    }`}</Typography>
+                  </TableCell>
+                  <TableCell align="center" className={classes.tablecell}>
+                    {contact.email}
+                  </TableCell>
+                  <TableCell align="center" className={classes.tablecell}>
+                    0557570564
+                  </TableCell>
+                  <TableCell align="center" className={classes.tablecell}>
+                    {contact.job}
+                  </TableCell>
+                  <TableCell
+                    align="right"
+                    className={clsx({
+                      [classes.tablecell]: true,
+                    })}
+                    padding="none"
+                  >
+                    <Actions />
+                  </TableCell>
+                </TableRow>
+              );
+            })}
           </TableBody>
         </Table>
       </TableContainer>

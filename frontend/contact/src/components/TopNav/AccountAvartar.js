@@ -3,7 +3,7 @@ import { Avatar } from '@material-ui/core'
 import { makeStyles } from '@material-ui/core/styles'
 import pic from '../../rex.jpg'
 
-function AccountAvartar() {
+function AccountAvartar({email, link}) {
     const useStyles = makeStyles(theme => ({
         small: {
             width: theme.spacing(4),
@@ -13,7 +13,7 @@ function AccountAvartar() {
     const classes = useStyles()
     return (
         <div>
-            <Avatar alt="Remy Sharp" src={pic} className={classes.small}/>
+            <Avatar alt="Remy Sharp" src={link} className={classes.small}/>
         </div>
     )
 }
