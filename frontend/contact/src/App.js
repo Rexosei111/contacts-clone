@@ -10,7 +10,7 @@ function App() {
     <Layout>
       <CssBaseline />
       <Switch>
-        <Route exact path="/">
+        <Route path="/">
           <Main />
         </Route>
         <Route path="/frequent">

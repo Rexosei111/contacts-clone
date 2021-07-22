@@ -10,7 +10,9 @@ function Main() {
     container : {
       marginLeft: fullSide ? 280: 0,
       overflowX: "hidden",
+      height: "90vh",
       padding: "5px 10px",
+      backgroundColor: "#ffffff"
   }
   }));
 

@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { Button} from "@material-ui/core";
+import { Button, Typography } from "@material-ui/core";
 import List from "@material-ui/core/List";
 import ListItem from "@material-ui/core/ListItem";
 import ListItemIcon from "@material-ui/core/ListItemIcon";
@@ -69,11 +69,11 @@ function SideBar({fullSide}) {
         Create Contact
       </Button>
       <List dense={true} className={classes.list}>
-        <ListItem button component={NavLink} to="/" className={classes.listitem}>
+        <ListItem button component={NavLink} exact to="/" className={classes.listitem}>
           <ListItemIcon>
             <PersonOutlineIcon fontSize="small" />
           </ListItemIcon>
-          <ListItemText>Contacts</ListItemText>
+          <ListItemText>Contact</ListItemText>
         </ListItem>
         <ListItem button component={NavLink} to="/frequent" className={classes.listitem}>
           <ListItemIcon>

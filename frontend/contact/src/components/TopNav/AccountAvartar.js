@@ -1,6 +1,7 @@
 import React from 'react'
 import { Avatar } from '@material-ui/core'
 import { makeStyles } from '@material-ui/core/styles'
+import pic from '../../rex.jpg'
 
 function AccountAvartar() {
     const useStyles = makeStyles(theme => ({
@@ -12,7 +13,7 @@ function AccountAvartar() {
     const classes = useStyles()
     return (
         <div>
-            <Avatar alt="Remy Sharp" src="/static/images/avatar/1.jpg" className={classes.small}/>
+            <Avatar alt="Remy Sharp" src={pic} className={classes.small}/>
         </div>
     )
 }
