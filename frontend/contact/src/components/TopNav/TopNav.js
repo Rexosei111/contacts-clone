@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import AppBar from "@material-ui/core/AppBar/AppBar";
 import ToolBar from "@material-ui/core/Toolbar/Toolbar";
 import { IconButton, Typography, makeStyles } from "@material-ui/core";
@@ -8,6 +8,9 @@ import SearchBar from "./Search";
 import RightSIde from "./RightSIde";
 
 function TopNav({setfullSide, fullSide}) {
+
+  const [email, setemail] = useState("")
+
   const useStyles = makeStyles(theme => ({
     appbar: {
       backgroundColor: "#ffffff",
@@ -30,6 +33,10 @@ function TopNav({setfullSide, fullSide}) {
     },
   }));
 
+  useEffect(() => {
+    setemail(sessionStorage.getItem("email"))
+  }, [])
+
   const classes = useStyles();
 
   return (
@@ -46,7 +53,7 @@ function TopNav({setfullSide, fullSide}) {
             </Typography>
           </div>
           <SearchBar />
-          <RightSIde />
+          <RightSIde email={email} />
         </ToolBar>
       </AppBar>
     </div>

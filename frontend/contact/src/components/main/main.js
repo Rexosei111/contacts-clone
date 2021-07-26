@@ -1,54 +1,53 @@
 import React, { useEffect, useState } from "react";
 import { makeStyles } from "@material-ui/core/styles";
 import Content from "./Content";
-import { Side } from "../Layout"
-import { Redirect } from 'react-router-dom'
-import axios from 'axios'
+import { Side } from "../Layout";
+import { Redirect } from "react-router-dom";
+import axios from "axios";
 
-function Main({token}) {
-  const [contacts, setContacts] = useState([])
-  const fullSide = React.useContext(Side)
-  
+function Main({ token }) {
+  // const [contacts, setContacts] = useState([]);
+  const {fullSide, Contacts, setContacts} = React.useContext(Side);
+
   const useStyles = makeStyles((theme) => ({
-    container : {
-      marginLeft: fullSide ? 280: 0,
+    container: {
+      marginLeft: fullSide ? 265 : 0,
       overflowX: "hidden",
       height: "90vh",
       padding: "5px 10px",
-      backgroundColor: "#ffffff"
-    }
+      backgroundColor: "#ffffff",
+    },
   }));
-  
+
   const classes = useStyles();
-  
+
   useEffect(() => {
-    axios({
-      method: "get",
-      url: "http://localhost:8000/api/contacts/",
-      headers: {
-        "Content-type": "application/json",
-        Authorization: `Token ${token}`,
-      },
-    })
-      .then((response) => {
-        // setloading(false);
-        setContacts(response.data);
+    if (token) {
+      axios({
+        method: "get",
+        url: "http://localhost:8000/api/contacts/",
+        headers: {
+          "Content-type": "application/json",
+          Authorization: `Token ${token}`,
+        },
       })
-      .catch((error) => {
-        // settoastOpen(true);
-        setContacts(fallbackContacts);
-        // setloading(false);
-      });
-  }, []);
+        .then((response) => {
+          setContacts(response.data);
+        })
+        .catch((error) => {
+          setContacts(fallbackContacts);
+        });
+    }
+  }, [token]);
 
   if (!token) {
-    return <Redirect to="/login" />
+    return <Redirect to="/login" />;
   }
 
   return (
-      <main className={classes.container}>
-        <Content contacts={contacts} />
-      </main>
+    <main className={classes.container}>
+      <Content Contacts={Contacts} token={token}/>
+    </main>
   );
 }
 

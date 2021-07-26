@@ -16,6 +16,7 @@ import BackupOutlinedIcon from '@material-ui/icons/BackupOutlined';
 import PublishOutlinedIcon from '@material-ui/icons/PublishOutlined';
 import EditOutlinedIcon from "@material-ui/icons/EditOutlined";
 import LabelOutlinedIcon from "@material-ui/icons/LabelOutlined";
+import ListItemSecondaryAction from '@material-ui/core/ListItemSecondaryAction';
 import Collapse from "@material-ui/core/Collapse";
 import { Paper } from "@material-ui/core";
 import { makeStyles } from "@material-ui/core/styles";
@@ -23,12 +24,13 @@ import AddIcon from "@material-ui/icons/Add";
 import PersonOutlineIcon from "@material-ui/icons/PersonOutline";
 import { NavLink } from 'react-router-dom'
 
-function SideBar({fullSide}) {
+function SideBar({fullSide, Contacts}) {
+
   const [label, setlabel] = useState(true);
   const useStyle = makeStyles((theme) => ({
 
     paper: {
-      width: 280,
+      width: 265,
       height: "100vh",
       position: "fixed",
       left: fullSide ? 0 : -280
@@ -48,6 +50,9 @@ function SideBar({fullSide}) {
         backgroundColor: '#e8f0fe',
         color: '#1967d2'
       }
+    },
+    secondaryAction: {
+      color: "#1967d2"
     },
     actionIcons: {
       color: "#5f6368"
@@ -74,6 +79,7 @@ function SideBar({fullSide}) {
             <PersonOutlineIcon fontSize="small" />
           </ListItemIcon>
           <ListItemText>Contact</ListItemText>
+          <ListItemSecondaryAction className={classes.secondaryAction}>{Contacts.length}</ListItemSecondaryAction>
         </ListItem>
         <ListItem button component={NavLink} to="/frequent" className={classes.listitem}>
           <ListItemIcon>

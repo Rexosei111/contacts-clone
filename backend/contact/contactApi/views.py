@@ -67,7 +67,7 @@ def ContactDeleteView(request, pk):
         return Response({"success": "Contact Deleted Succesfully"}, status=status.HTTP_200_OK)
     return Response({"error": "You are Unathorized to delete this contact"}, status=status.HTTP_401_UNAUTHORIZED)
 
-@api_view(['PUT'])
+@api_view(['PUT', 'PATCH'])
 @permission_classes([IsAuthenticated])
 def FavoriteContact(request, pk):
     user = request.user
@@ -86,7 +86,7 @@ def FavoriteContact(request, pk):
         return Response({"success": "Update Successful"}, status=status.HTTP_200_OK)
     return Response({"error": "Update Unsuccesful"})
 
-@api_view(["PUT"])
+@api_view(["PUT", "PATCH"])
 @permission_classes([IsAuthenticated])
 # @parser_classes([MultiPartParser, FormParser])
 def ContactUpdateView(request, pk):

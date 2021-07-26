@@ -1,5 +1,4 @@
-import React, { useState } from "react";
-// import { makeStyles } from '@material-ui/core/styles'
+import React from "react";
 import { makeStyles } from "@material-ui/core/styles";
 import Paper from "@material-ui/core/Paper";
 import Table from "@material-ui/core/Table";
@@ -7,11 +6,9 @@ import TableBody from "@material-ui/core/TableBody";
 import TableCell from "@material-ui/core/TableCell";
 import TableContainer from "@material-ui/core/TableContainer";
 import TableHead from "@material-ui/core/TableHead";
-import TablePagination from "@material-ui/core/TablePagination";
 import TableRow from "@material-ui/core/TableRow";
 import { Typography, Checkbox } from "@material-ui/core";
 import AccountAvartar from "../TopNav/AccountAvartar";
-import { boxSizing, height } from "@material-ui/system";
 import clsx from "clsx";
 import Actions from "./Actions";
 
@@ -85,7 +82,7 @@ const useStyles = makeStyles({
   },
 });
 
-function Content({ contacts }) {
+function Content({ Contacts, token }) {
   const classes = useStyles();
 
   return (
@@ -107,7 +104,7 @@ function Content({ contacts }) {
             </TableRow>
           </TableHead>
           <TableBody>
-            {contacts.map((contact) => {
+            {Contacts.map((contact) => {
               return (
                 <TableRow
                   key={contact.id}
@@ -125,12 +122,6 @@ function Content({ contacts }) {
                   >
                       <Checkbox className={classes.checkbox} />
                       <AccountAvartar link={contact.image} />
-
-                    {/* {changed ? (
-                      <Checkbox className={classes.checkbox} />
-                    ) : (
-                      <AccountAvartar link={contact.image} />
-                    )} */}
                     <Typography component="span" variant="body2">{`${
                       contact.first_name + " " + contact.last_name
                     }`}</Typography>
@@ -151,7 +142,7 @@ function Content({ contacts }) {
                     })}
                     padding="none"
                   >
-                    <Actions />
+                    {contact.favorite ? <Actions fav="true" Contacts={Contacts} token={token} id={contact.id}/> : <Actions Contacts={Contacts} token={token} id={contact.id}/>}
                   </TableCell>
                 </TableRow>
               );

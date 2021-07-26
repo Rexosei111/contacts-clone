@@ -7,7 +7,7 @@ import { makeStyles } from '@material-ui/core/styles'
 import AccountAvartar from "./AccountAvartar";
 import { IconButton } from "@material-ui/core";
 
-function RightSIde() {
+function RightSIde({email}) {
     const useStyles = makeStyles(theme => ({
         right: {
             display: "flex",
@@ -21,6 +21,7 @@ function RightSIde() {
           height: theme.spacing(5)
         }
     }))
+
     const classes = useStyles()
   return (
     <div className={clsx(classes.right)}>
@@ -30,7 +31,7 @@ function RightSIde() {
             <AppsIcon />
         </IconButton>
         <IconButton className={classes.smallBtn}>
-          <AccountAvartar />
+          <AccountAvartar email={email} />
         </IconButton>
     </div>
   );
