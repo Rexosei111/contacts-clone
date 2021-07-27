@@ -2,7 +2,6 @@ import { Typography, Divider, IconButton } from "@material-ui/core";
 import { makeStyles, TextField, Button } from "@material-ui/core";
 import React, { useState } from "react";
 import FacebookIcon from "@material-ui/icons/Facebook";
-import CropFreeIcon from "@material-ui/icons/CropFree";
 import { InputAdornment } from "@material-ui/core";
 import MailOutlineIcon from "@material-ui/icons/MailOutline";
 import LockOpenIcon from "@material-ui/icons/LockOpen";
@@ -10,7 +9,6 @@ import { useFormik } from "formik";
 import ErrorOutlineOutlinedIcon from "@material-ui/icons/ErrorOutlineOutlined";
 import VisibilityIcon from '@material-ui/icons/Visibility';
 import VisibilityOffIcon from '@material-ui/icons/VisibilityOff';
-import Alert from '@material-ui/lab/Alert';
 import axios from 'axios'
 
 const initialValues = {
@@ -18,20 +16,20 @@ const initialValues = {
   Password: "",
 };
 
-const validate = (values) => {
-  let errors = {};
+// const validate = (values) => {
+//   let errors = {};
 
-  if (!values.Email) {
-    errors.Email = "Required Field";
-  } else if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(values.Email)) {
-    errors.Email = "Invalid Email Format";
-  }
+//   if (!values.Email) {
+//     errors.Email = "Required Field";
+//   } else if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(values.Email)) {
+//     errors.Email = "Invalid Email Format";
+//   }
 
-  if (!values.Password) {
-    errors.Password = "Required Field";
-  }
-  return errors;
-};
+//   if (!values.Password) {
+//     errors.Password = "Required Field";
+//   }
+//   return errors;
+// };
 
 function Form({setToken}) {
   const [ViewPassword, setViewPassword] = useState(false)

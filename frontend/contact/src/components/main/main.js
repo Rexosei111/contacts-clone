@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect } from "react";
 import { makeStyles } from "@material-ui/core/styles";
 import Content from "./Content";
 import { Side } from "../Layout";
@@ -6,8 +6,8 @@ import { Redirect } from "react-router-dom";
 import axios from "axios";
 
 function Main({ token }) {
-  // const [contacts, setContacts] = useState([]);
-  const {fullSide, Contacts, setContacts} = React.useContext(Side);
+  // const [contacts, handleContacts] = useState([]);
+  const { fullSide, Contacts, handleContacts } = React.useContext(Side);
 
   const useStyles = makeStyles((theme) => ({
     container: {
@@ -32,13 +32,13 @@ function Main({ token }) {
         },
       })
         .then((response) => {
-          setContacts(response.data);
+          handleContacts(response.data);
         })
         .catch((error) => {
-          setContacts(fallbackContacts);
+          handleContacts(fallbackContacts);
         });
     }
-  }, [token]);
+  }, [token, handleContacts]);
 
   if (!token) {
     return <Redirect to="/login" />;
@@ -46,7 +46,7 @@ function Main({ token }) {
 
   return (
     <main className={classes.container}>
-      <Content Contacts={Contacts} token={token}/>
+      <Content Contacts={Contacts} token={token} />
     </main>
   );
 }

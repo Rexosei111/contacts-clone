@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import { makeStyles } from "@material-ui/core/styles";
 import Paper from "@material-ui/core/Paper";
 import Table from "@material-ui/core/Table";
@@ -11,6 +11,7 @@ import { Typography, Checkbox } from "@material-ui/core";
 import AccountAvartar from "../TopNav/AccountAvartar";
 import clsx from "clsx";
 import Actions from "./Actions";
+import SelectedHeader from "./SelectedHeader";
 
 const columns = [
   { id: "name", label: "Name", minWidth: 170 },
@@ -50,12 +51,6 @@ const useStyles = makeStyles({
       "& span": {
         visibility: "visible",
       },
-      "& div": {
-        display: "none"
-      },
-      "& span:first-child": {
-        display: "flex"
-      }
     },
   },
   tablecell: {
@@ -78,31 +73,63 @@ const useStyles = makeStyles({
   checkbox: {
     width: 32,
     height: 32,
-    display: "none"
   },
 });
 
 function Content({ Contacts, token }) {
+  const [Selected, setSelected] = useState([]);
+  const [hoveredEl, setHoveredEl] = useState("");
+
+  const handleCheck = (e) => {
+    const checkId = e.target.value;
+    if (Selected.includes(checkId)) {
+      setSelected((prevState) => prevState.filter((s) => s !== checkId));
+    } else {
+      setSelected((prevState) => [...prevState, checkId]);
+    }
+  };
+
+  const clearChecked = () => {
+    setSelected([])
+  }
+
+  const handleHover = (event) => {
+    const { id } = event.currentTarget.dataset;
+    setHoveredEl(id);
+  };
+
+  const handleLeave = () => {
+    setHoveredEl("");
+  };
+
   const classes = useStyles();
 
   return (
     <Paper className={classes.root} elevation={0}>
       <TableContainer className={classes.container}>
         <Table stickyHeader aria-label="sticky table">
-          <TableHead>
-            <TableRow>
-              {columns.map((column) => (
-                <TableCell
-                  key={column.id}
-                  align={column.align}
-                  style={{ minWidth: column.minWidth }}
-                  className={classes.tablehead}
-                >
-                  {column.label}
-                </TableCell>
-              ))}
-            </TableRow>
-          </TableHead>
+          {Selected.length > 0 ? (
+            <SelectedHeader
+            clearChecked={clearChecked}
+              Selectedlength={Selected.length}
+              Contactlength={Contacts.length}
+            />
+          ) : (
+            <TableHead>
+              <TableRow>
+                {columns.map((column) => (
+                  <TableCell
+                    key={column.id}
+                    align={column.align}
+                    style={{ minWidth: column.minWidth }}
+                    className={classes.tablehead}
+                  >
+                    {column.label}
+                  </TableCell>
+                ))}
+              </TableRow>
+            </TableHead>
+          )}
           <TableBody>
             {Contacts.map((contact) => {
               return (
@@ -111,17 +138,29 @@ function Content({ Contacts, token }) {
                   hover
                   role="checkbox"
                   tabIndex={-1}
+                  data-id={contact.id}
                   className={classes.tablerow}
+                  onMouseEnter={handleHover}
+                  onMouseLeave={handleLeave}
                 >
                   <TableCell
                     className={clsx({
                       [classes.name]: true,
                       [classes.tablecell]: true,
                     })}
-                    padding="normal"
                   >
-                      <Checkbox className={classes.checkbox} />
+                    {hoveredEl === String(contact.id) ||
+                    Selected.includes(String(contact.id)) ? (
+                      <Checkbox
+                        color="primary"
+                        value={contact.id}
+                        onChange={handleCheck}
+                        className={classes.checkbox}
+                        checked={Selected.includes(String(contact.id))}
+                      />
+                    ) : (
                       <AccountAvartar link={contact.image} />
+                    )}
                     <Typography component="span" variant="body2">{`${
                       contact.first_name + " " + contact.last_name
                     }`}</Typography>
@@ -142,7 +181,20 @@ function Content({ Contacts, token }) {
                     })}
                     padding="none"
                   >
-                    {contact.favorite ? <Actions fav="true" Contacts={Contacts} token={token} id={contact.id}/> : <Actions Contacts={Contacts} token={token} id={contact.id}/>}
+                    {contact.favorite ? (
+                      <Actions
+                        fav="true"
+                        Contacts={Contacts}
+                        token={token}
+                        id={contact.id}
+                      />
+                    ) : (
+                      <Actions
+                        Contacts={Contacts}
+                        token={token}
+                        id={contact.id}
+                      />
+                    )}
                   </TableCell>
                 </TableRow>
               );

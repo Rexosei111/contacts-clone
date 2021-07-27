@@ -7,19 +7,18 @@ import ContactIcon from "@material-ui/icons/AccountCircleRounded";
 import SearchBar from "./Search";
 import RightSIde from "./RightSIde";
 
-function TopNav({setfullSide, fullSide}) {
+function TopNav({ setfullSide, fullSide }) {
+  const [email, setemail] = useState("");
 
-  const [email, setemail] = useState("")
-
-  const useStyles = makeStyles(theme => ({
+  const useStyles = makeStyles((theme) => ({
     appbar: {
       backgroundColor: "#ffffff",
-      color: "#5f6368"
+      color: "#5f6368",
     },
     account: {
-        color: '#1a73e8',
-        width: theme.spacing(5.5),
-        height: theme.spacing(5.5)
+      color: "#1a73e8",
+      width: theme.spacing(5.5),
+      height: theme.spacing(5.5),
     },
     toolbar: {
       display: "flex",
@@ -34,8 +33,9 @@ function TopNav({setfullSide, fullSide}) {
   }));
 
   useEffect(() => {
-    setemail(sessionStorage.getItem("email"))
-  }, [])
+    const email = sessionStorage.getItem("email");
+    setemail(email);
+  }, []);
 
   const classes = useStyles();
 
@@ -44,7 +44,11 @@ function TopNav({setfullSide, fullSide}) {
       <AppBar position="static" elevation={0} className={classes.appbar}>
         <ToolBar className={classes.toolbar}>
           <div className={classes.leftSide}>
-            <IconButton edge="start" arial-label="Menu" onClick={() => setfullSide(!fullSide)}>
+            <IconButton
+              edge="start"
+              arial-label="Menu"
+              onClick={() => setfullSide(!fullSide)}
+            >
               <MenuIcon />
             </IconButton>
             <ContactIcon fontSize="large" className={classes.account} />
