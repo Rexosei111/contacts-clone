@@ -8,7 +8,6 @@ import axios from "axios";
 function Main({ token }) {
   // const [contacts, handleContacts] = useState([]);
   const { fullSide, Contacts, handleContacts } = React.useContext(Side);
-
   const useStyles = makeStyles((theme) => ({
     container: {
       marginLeft: fullSide ? 265 : 0,
@@ -18,6 +17,7 @@ function Main({ token }) {
       backgroundColor: "#ffffff",
     },
   }));
+
 
   const classes = useStyles();
 

@@ -5,6 +5,7 @@ import {Route, Switch } from "react-router-dom";
 import Layout from "./components/Layout";
 import Login from "./components/Login/Login";
 import useToken from './components/useToken'
+import Detail from "./components/Detail/Detail";
 
 function App() {
   const {token, setToken} = useToken()
@@ -16,6 +17,7 @@ function App() {
         <Route path="/" render={() => <Main token={token}/>} exact />
         <Route path="/frequent" render={() => <Main token={token} />} exact />
         <Route path="/login" render={() => <Login setToken={setToken} token={token} />} exact />
+        <Route path="/contacts/:id" render={() => <Detail token={token} />} exact/>
       </Switch>
     </Layout>
   );

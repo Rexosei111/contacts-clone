@@ -3,9 +3,9 @@ import StarOutlineIcon from "@material-ui/icons/StarOutline";
 import StarIcon from "@material-ui/icons/Star";
 import EditOutlinedIcon from "@material-ui/icons/EditOutlined";
 import { makeStyles } from "@material-ui/core/styles";
-import DeleteOutlinedIcon from "@material-ui/icons/DeleteOutlined";
 import axios from "axios";
 import { Side } from "../Layout";
+import Menu from '../Menu'
 
 const useStyles = makeStyles({
   actions: {
@@ -51,21 +51,21 @@ function Actions({ fav, Contacts, token, id }) {
     });
   };
 
-  const handleDelete = (e) => {
-    e.preventDefault();
-    axios({
-      method: "DELETE",
-      url: `http://localhost:8000/api/contacts/${id}/delete/`,
-      headers: {
-        "content-type": "application/json",
-        Authorization: `Token ${token}`,
-      },
-    })
-      .then((response) => {
-        setContacts(Contacts.filter((contact) => contact.id !== id));
-      })
-      .catch((error) => console.log(error));
-  };
+  // const handleDelete = (e) => {
+  //   e.preventDefault();
+  //   axios({
+  //     method: "DELETE",
+  //     url: `http://localhost:8000/api/contacts/${id}/delete/`,
+  //     headers: {
+  //       "content-type": "application/json",
+  //       Authorization: `Token ${token}`,
+  //     },
+  //   })
+  //     .then((response) => {
+  //       setContacts(Contacts.filter((contact) => contact.id !== id));
+  //     })
+  //     .catch((error) => console.log(error));
+  // };
 
   const classes = useStyles();
   return (
@@ -77,7 +77,8 @@ function Actions({ fav, Contacts, token, id }) {
       )}
 
       <EditOutlinedIcon fontSize="small" />
-      <DeleteOutlinedIcon fontSize="small" onClick={handleDelete} />
+      {/* <DeleteOutlinedIcon fontSize="small" onClick={handleDelete} /> */}
+      <Menu />
     </span>
   );
 }

@@ -12,6 +12,7 @@ import AccountAvartar from "../TopNav/AccountAvartar";
 import clsx from "clsx";
 import Actions from "./Actions";
 import SelectedHeader from "./SelectedHeader";
+import { useHistory } from "react-router";
 
 const columns = [
   { id: "name", label: "Name", minWidth: 170 },
@@ -79,6 +80,7 @@ const useStyles = makeStyles({
 function Content({ Contacts, token }) {
   const [Selected, setSelected] = useState([]);
   const [hoveredEl, setHoveredEl] = useState("");
+  const history = useHistory()
 
   const handleCheck = (e) => {
     const checkId = e.target.value;
@@ -101,6 +103,11 @@ function Content({ Contacts, token }) {
   const handleLeave = () => {
     setHoveredEl("");
   };
+
+  const viewDetail = (e, id) => {
+
+    history.push(`/contacts/${id}`)
+  }
 
   const classes = useStyles();
 
@@ -142,6 +149,7 @@ function Content({ Contacts, token }) {
                   className={classes.tablerow}
                   onMouseEnter={handleHover}
                   onMouseLeave={handleLeave}
+                  onClick={(e) => viewDetail(e, contact.id)}
                 >
                   <TableCell
                     className={clsx({

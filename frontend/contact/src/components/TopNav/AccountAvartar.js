@@ -7,9 +7,13 @@ const useStyles = makeStyles((theme) => ({
     width: theme.spacing(4),
     height: theme.spacing(4),
   },
+  xxlarge: {
+    width: theme.spacing(23),
+    height: theme.spacing(23),
+  },
 }));
 
-function AccountAvartar({ email, link }) {
+function AccountAvartar({ email, link, size }) {
   const classes = useStyles();
 
   return (
@@ -17,7 +21,7 @@ function AccountAvartar({ email, link }) {
       <Avatar
         alt={email?.toUpperCase()}
         src={String(link)}
-        className={classes.small}
+        className={classes[size]}
       />
     </div>
   );
