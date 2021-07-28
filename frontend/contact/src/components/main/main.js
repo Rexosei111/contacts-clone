@@ -1,9 +1,10 @@
-import React, { useEffect } from "react";
+import React, { useEffect} from "react";
 import { makeStyles } from "@material-ui/core/styles";
 import Content from "./Content";
 import { Side } from "../Layout";
 import { Redirect } from "react-router-dom";
 import axios from "axios";
+
 
 function Main({ token }) {
   // const [contacts, handleContacts] = useState([]);
@@ -18,10 +19,10 @@ function Main({ token }) {
     },
   }));
 
-
   const classes = useStyles();
 
   useEffect(() => {
+    
     if (token) {
       axios({
         method: "get",

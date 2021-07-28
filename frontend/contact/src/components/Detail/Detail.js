@@ -11,6 +11,7 @@ import StarIcon from "@material-ui/icons/Star";
 import Menu from "../Menu";
 import { useHistory, useParams } from "react-router-dom";
 import axios from "axios";
+import ContactDetails from "./ContactDetails";
 
 function Detail({ token }) {
   const { id } = useParams();
@@ -29,6 +30,7 @@ function Detail({ token }) {
       height: "90vh",
       padding: "10px 20px",
       backgroundColor: "#ffffff",
+      // overflowY: "auto"
     },
     paper: {
       width: "100%",
@@ -42,7 +44,7 @@ function Detail({ token }) {
       height: "100%",
       display: "flex",
       alignItems: "center",
-      gap: 30,
+      gap: 25,
       // backgroundColor: "#22efce"
     },
     info: {
@@ -73,10 +75,7 @@ function Detail({ token }) {
     history.goBack();
   };
 
-  useEffect(() => {
-      setIsFav(contact.favorite)
-  }, [contact])
-
+  
   useEffect(() => {
     axios({
       method: "get",
@@ -86,9 +85,13 @@ function Detail({ token }) {
         Authorization: `Token ${token}`,
       },
     })
-      .then((res) => setContact(res.data))
-      .catch((err) => console.log(err));
-  }, []);
+    .then((res) => setContact(res.data))
+    .catch((err) => console.log(err));
+  }, [id, token]);
+  
+  useEffect(() => {
+      setIsFav(contact.favorite)
+  }, [contact])
 
   const handleFavorite = (e) => {
     setIsFav(!Isfav);
@@ -120,11 +123,12 @@ function Detail({ token }) {
       <Paper className={classes.paper} elevation={0}>
         <ArrowBackIcon onClick={prevPage} />
         <div className={classes.name}>
-          <AccountAvartar size="xxlarge" link={contact.image} />
+          <AccountAvartar size="xxlarge" link={contact.image} email={contact.first_name}/>
           <div className={classes.info}>
             <Typography variant="h5">{`${
               contact.first_name + " " + contact.last_name
             }`}</Typography>
+          <Typography variant="h6">{contact.job}</Typography>
             <IconButton className={classes.label}>
               <LabelOutlined color="primary" fontSize="small" />
             </IconButton>
@@ -145,6 +149,9 @@ function Detail({ token }) {
         </div>
       </Paper>
       <Divider light />
+      <div style={{ padding: "20px 60px", height: "57vh", width: "100%", overflowY: "auto"}}>
+          <ContactDetails contact={contact} />
+      </div>
     </main>
   );
 }

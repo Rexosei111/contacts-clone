@@ -1,3 +1,4 @@
+from django.db.models.query import QuerySet
 from rest_framework import status
 from rest_framework.response import Response
 from rest_framework.decorators import api_view, permission_classes, parser_classes
@@ -53,6 +54,16 @@ def ContactDetailView(request, pk):
         return Response(serializer.data, status=status.HTTP_200_OK)
     return Response({"message": "Contact is not in you contact list"}, status=status.HTTP_404_NOT_FOUND)
 
+
+class DetailContactView(generics.RetrieveAPIView):
+    serializer_class = ContactSerializer
+    permission_classes = [IsAuthenticated]
+
+    def get_queryset(self):
+        # queryset = super(ContactListView, self).get_queryset()
+        user = self.request.user
+        queryset = Contact.objects.filter(user=user)
+        return queryset
 
 @api_view(["DELETE"])
 @permission_classes([IsAuthenticated])

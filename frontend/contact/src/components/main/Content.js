@@ -13,6 +13,7 @@ import clsx from "clsx";
 import Actions from "./Actions";
 import SelectedHeader from "./SelectedHeader";
 import { useHistory } from "react-router";
+import { Link } from "react-router-dom";
 
 const columns = [
   { id: "name", label: "Name", minWidth: 170 },
@@ -69,7 +70,7 @@ const useStyles = makeStyles({
     display: "flex",
     alignItems: "center",
     height: 53,
-    gap: 15,
+    gap: 20,
   },
   checkbox: {
     width: 32,
@@ -80,7 +81,7 @@ const useStyles = makeStyles({
 function Content({ Contacts, token }) {
   const [Selected, setSelected] = useState([]);
   const [hoveredEl, setHoveredEl] = useState("");
-  const history = useHistory()
+  const history = useHistory();
 
   const handleCheck = (e) => {
     const checkId = e.target.value;
@@ -92,8 +93,8 @@ function Content({ Contacts, token }) {
   };
 
   const clearChecked = () => {
-    setSelected([])
-  }
+    setSelected([]);
+  };
 
   const handleHover = (event) => {
     const { id } = event.currentTarget.dataset;
@@ -105,9 +106,8 @@ function Content({ Contacts, token }) {
   };
 
   const viewDetail = (e, id) => {
-
-    history.push(`/contacts/${id}`)
-  }
+    history.push(`/contacts/${id}`);
+  };
 
   const classes = useStyles();
 
@@ -117,7 +117,7 @@ function Content({ Contacts, token }) {
         <Table stickyHeader aria-label="sticky table">
           {Selected.length > 0 ? (
             <SelectedHeader
-            clearChecked={clearChecked}
+              clearChecked={clearChecked}
               Selectedlength={Selected.length}
               Contactlength={Contacts.length}
             />
@@ -167,7 +167,11 @@ function Content({ Contacts, token }) {
                         checked={Selected.includes(String(contact.id))}
                       />
                     ) : (
-                      <AccountAvartar link={contact.image} />
+                      <AccountAvartar
+                        link={contact.image}
+                        size="small"
+                        email={contact.first_name}
+                      />
                     )}
                     <Typography component="span" variant="body2">{`${
                       contact.first_name + " " + contact.last_name
@@ -177,7 +181,7 @@ function Content({ Contacts, token }) {
                     {contact.email}
                   </TableCell>
                   <TableCell align="center" className={classes.tablecell}>
-                    0557570564
+                    {contact.phone}
                   </TableCell>
                   <TableCell align="center" className={classes.tablecell}>
                     {contact.job}
@@ -210,15 +214,6 @@ function Content({ Contacts, token }) {
           </TableBody>
         </Table>
       </TableContainer>
-      {/* <TablePagination
-          rowsPerPageOptions={[10, 25, 100]}
-          component="div"
-          count={rows.length}
-          rowsPerPage={rowsPerPage}
-          page={page}
-          onChangePage={handleChangePage}
-          onChangeRowsPerPage={handleChangeRowsPerPage}
-        /> */}
     </Paper>
   );
 }

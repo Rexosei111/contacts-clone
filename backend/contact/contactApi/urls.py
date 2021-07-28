@@ -2,7 +2,7 @@ from django.urls import path
 from .views import (
     ContactListView, CreateContactView, 
     ContactDetailView, UserRegistrationView,
-    ContactUpdateView, ContactDeleteView, GetUserToken, FavoriteContact
+    ContactUpdateView, ContactDeleteView, GetUserToken, FavoriteContact, DetailContactView
 ) 
 from rest_framework.authtoken import views as auth_views
 
