@@ -106,6 +106,8 @@ function Content({ Contacts, token }) {
   };
 
   const viewDetail = (e, id) => {
+    // console.log(e.target.tagName.toLowerCase())
+    // if (e.target.tagName.toLowerCase() !== "input" || e.target.tagName !== "svg")
     history.push(`/contacts/${id}`);
   };
 
@@ -162,6 +164,7 @@ function Content({ Contacts, token }) {
                       <Checkbox
                         color="primary"
                         value={contact.id}
+                        onClick={(e) => e.stopPropagation()}
                         onChange={handleCheck}
                         className={classes.checkbox}
                         checked={Selected.includes(String(contact.id))}

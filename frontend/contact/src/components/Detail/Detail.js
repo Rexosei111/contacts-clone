@@ -16,7 +16,6 @@ import CloseIcon from "@material-ui/icons/Close";
 
 function Detail(props) {
   const query = new URLSearchParams(useLocation().search);
-  console.log(query);
 
   const { id } = useParams();
   const [Edit, setEdit] = useState(query.get("edit"));
@@ -148,7 +147,7 @@ function Detail(props) {
           />
           <div className={classes.info}>
             <Typography variant="h5">{`${
-              contact.first_name + " " + contact.last_name
+              contact?.first_name + " " + contact?.last_name
             }`}</Typography>
             <Typography variant="h6">{contact.job}</Typography>
             <IconButton className={classes.label}>

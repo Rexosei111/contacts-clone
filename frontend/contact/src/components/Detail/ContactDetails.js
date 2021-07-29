@@ -43,7 +43,7 @@ function ContactDetails({ contact }) {
           ([key, value]) =>
             value !== null &&
             icons[key] && (
-              <ListItem disableGutters>
+              <ListItem key={key} disableGutters>
                 <ListItemIcon>{icons[key]}</ListItemIcon>
                 <Typography color="primary" variant="body2">
                   {value}

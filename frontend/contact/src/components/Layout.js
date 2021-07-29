@@ -9,14 +9,7 @@ const alphabetArray = () => {
   return alphabet;
 };
 
-const colors = [
-  "#3f51b5",
-  "#00695c",
-  "#e65100",
-  "#d84315",
-  "#b71c1c",
-  "#0277bd",
-];
+const colors = ["#1e88e5", "#009688", "#ef6c00", "#607d8b", "#0277bd", "#d81b60"];
 
 const fallbackColors = (alphabets) => {
   const colorComb = {};
@@ -38,7 +31,7 @@ function Layout({ children }) {
   useEffect(() => {
     const alphabets = alphabetArray();
     const fallbackColorCode = fallbackColors(alphabets);
-    setcolorCodes(fallbackColorCode)
+    setcolorCodes(fallbackColorCode);
   }, []);
 
   const handleContacts = useCallback((data) => {

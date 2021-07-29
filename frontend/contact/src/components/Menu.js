@@ -17,10 +17,12 @@ function MoreMenu() {
 
   const handleClick = (e) => {
     setanchorEl(e.currentTarget);
+    e.stopPropagation();
   };
 
-  const handleClose = () => {
+  const handleClose = (e) => {
     setanchorEl(null);
+    e.stopPropagation();
   };
   return (
     <div>
@@ -32,6 +34,7 @@ function MoreMenu() {
         <MoreVertIcon fontSize="small" />
       </IconButton>
       <Menu
+        container={document.body}
         id="more-options"
         anchorEl={anchorEl}
         keepMounted

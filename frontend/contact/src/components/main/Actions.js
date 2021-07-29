@@ -35,6 +35,7 @@ function Actions({ fav, Contacts, token, id }) {
 
   const handleFavorite = (e) => {
     e.preventDefault();
+    e.stopPropagation()
     setIsFav(!isFav);
 
     Contacts.forEach((contact) => {

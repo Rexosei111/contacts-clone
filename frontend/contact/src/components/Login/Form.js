@@ -34,7 +34,7 @@ const initialValues = {
 function Form({setToken}) {
   const [ViewPassword, setViewPassword] = useState(false)
 
-  const useStyle = makeStyles({
+  const useStyle = makeStyles(theme => ({
     form: {
       width: "100%",
       display: "flex",
@@ -55,7 +55,13 @@ function Form({setToken}) {
         width: "38%",
       },
     },
-  });
+    google: {
+      height: theme.spacing(5),
+      width: theme.spacing(5),
+      border: "1px solid #e0e0e0",
+      alignSelf: "center"
+    }
+  }));
 
   const classes = useStyle();
 
@@ -168,15 +174,17 @@ function Form({setToken}) {
           <Divider />
         </div>
       </Typography>
-      <Button
+      <IconButton className={classes.google}>
+        <Typography variant="h6">G</Typography>
+      </IconButton>
+      {/* <Button
         variant="outlined"
         startIcon={<FacebookIcon />}
         color="Secondary"
         disableElevation
-        component="a"
-        href="https://7b06b7ec5ff2.ngrok.io/users/login/google">
+        component="a">
         google
-      </Button>
+      </Button> */}
     </form>
     </>
   );
