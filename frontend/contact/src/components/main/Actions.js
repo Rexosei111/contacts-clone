@@ -6,6 +6,7 @@ import { makeStyles } from "@material-ui/core/styles";
 import axios from "axios";
 import { Side } from "../Layout";
 import Menu from '../Menu'
+import { useHistory } from "react-router";
 
 const useStyles = makeStyles({
   actions: {
@@ -67,6 +68,8 @@ function Actions({ fav, Contacts, token, id }) {
   //     .catch((error) => console.log(error));
   // };
 
+  const history = useHistory()
+
   const classes = useStyles();
   return (
     <span className={classes.actions}>
@@ -76,7 +79,7 @@ function Actions({ fav, Contacts, token, id }) {
         <StarOutlineIcon fontSize="small" onClick={handleFavorite} />
       )}
 
-      <EditOutlinedIcon fontSize="small" />
+      <EditOutlinedIcon fontSize="small" onClick={() => history.push("/contacts/"+ id + "?edit=1")} />
       {/* <DeleteOutlinedIcon fontSize="small" onClick={handleDelete} /> */}
       <Menu />
     </span>

@@ -9,13 +9,17 @@ import { Divider } from "@material-ui/core";
 import StarOutline from "@material-ui/icons/StarOutline";
 import StarIcon from "@material-ui/icons/Star";
 import Menu from "../Menu";
-import { useHistory, useParams } from "react-router-dom";
+import { useHistory, useLocation, useParams } from "react-router-dom";
 import axios from "axios";
 import ContactDetails from "./ContactDetails";
+import CloseIcon from "@material-ui/icons/Close";
 
-function Detail({ token }) {
+function Detail(props) {
+  const query = new URLSearchParams(useLocation().search);
+  console.log(query);
+
   const { id } = useParams();
-
+  const [Edit, setEdit] = useState(query.get("edit"));
   const history = useHistory();
 
   const { fullSide, Contacts, handleContacts } = React.useContext(Side);
@@ -69,29 +73,32 @@ function Detail({ token }) {
       alignItems: "center",
       gap: 5,
     },
+    backBtn: {
+      height: theme.spacing(4),
+      width: theme.spacing(4),
+    },
   }));
 
   const prevPage = () => {
     history.goBack();
   };
 
-  
   useEffect(() => {
     axios({
       method: "get",
       url: `http://localhost:8000/api/contacts/${id}/`,
       headers: {
         "Content-type": "application/json",
-        Authorization: `Token ${token}`,
+        Authorization: `Token ${props.token}`,
       },
     })
-    .then((res) => setContact(res.data))
-    .catch((err) => console.log(err));
-  }, [id, token]);
-  
+      .then((res) => setContact(res.data))
+      .catch((err) => console.log(err));
+  }, [id, props.token]);
+
   useEffect(() => {
-      setIsFav(contact.favorite)
-  }, [contact])
+    setIsFav(contact.favorite);
+  }, [contact]);
 
   const handleFavorite = (e) => {
     setIsFav(!Isfav);
@@ -100,57 +107,95 @@ function Detail({ token }) {
       url: `http://localhost:8000/api/contacts/${id}/fav/`,
       headers: {
         "Content-type": "application/json",
-        Authorization: `Token ${token}`,
+        Authorization: `Token ${props.token}`,
       },
-    })
-    .then(() => {
-        handleContacts(Contacts.map(contact => {
-            if (contact.id === id) {
-                return {...contact, favorite: !contact.favorite}
-            }
-            else {
-                return {...contact}
-            }
-            
-        }))
+    }).then(() => {
+      handleContacts(
+        Contacts.map((contact) => {
+          if (contact.id === id) {
+            return { ...contact, favorite: !contact.favorite };
+          } else {
+            return { ...contact };
+          }
+        })
+      );
     });
   };
 
+  const handleEdit = () => {
+    history.push("/contacts/" + contact.id + "?edit=1")
+    setEdit(1)
+  }
   const classes = useStyles();
 
   return (
     <main className={classes.container}>
       <Paper className={classes.paper} elevation={0}>
-        <ArrowBackIcon onClick={prevPage} />
+        {Edit ? (
+          <IconButton className={classes.backBtn} onClick={() => setEdit(0)}>
+            <CloseIcon fontSize="small" />
+          </IconButton>
+        ) : (
+          <IconButton className={classes.backBtn}>
+            <ArrowBackIcon onClick={prevPage} />
+          </IconButton>
+        )}
         <div className={classes.name}>
-          <AccountAvartar size="xxlarge" link={contact.image} email={contact.first_name}/>
+          <AccountAvartar
+            size="xxlarge"
+            link={contact.image}
+            email={contact.first_name}
+          />
           <div className={classes.info}>
             <Typography variant="h5">{`${
               contact.first_name + " " + contact.last_name
             }`}</Typography>
-          <Typography variant="h6">{contact.job}</Typography>
+            <Typography variant="h6">{contact.job}</Typography>
             <IconButton className={classes.label}>
               <LabelOutlined color="primary" fontSize="small" />
             </IconButton>
           </div>
         </div>
         <div className={classes.actions}>
-          <div className={classes.actionBtn}>
-            {Isfav ? (
-              <StarIcon fontSize="small" color="primary" onClick={handleFavorite} />
-            ) : (
-              <StarOutline fontSize="small" onClick={handleFavorite} />
-            )}
-            <Menu />
-            <Button variant="contained" color="primary" elevation={0}>
-              Edit
+          {Edit ? (
+            <Button variant="contained" color="primary" disableElevation>
+              Save
             </Button>
-          </div>
+          ) : (
+            <div className={classes.actionBtn}>
+              {Isfav ? (
+                <StarIcon
+                  fontSize="small"
+                  color="primary"
+                  onClick={handleFavorite}
+                />
+              ) : (
+                <StarOutline fontSize="small" onClick={handleFavorite} />
+              )}
+              <Menu />
+              <Button
+                variant="contained"
+                color="primary"
+                disableElevation
+                onClick={handleEdit
+                }
+              >
+                Edit
+              </Button>
+            </div>
+          )}
         </div>
       </Paper>
       <Divider light />
-      <div style={{ padding: "20px 60px", height: "57vh", width: "100%", overflowY: "auto"}}>
-          <ContactDetails contact={contact} />
+      <div
+        style={{
+          padding: "20px 60px",
+          height: "57vh",
+          width: "100%",
+          overflowY: "auto",
+        }}
+      >
+        <ContactDetails contact={contact} />
       </div>
     </main>
   );
