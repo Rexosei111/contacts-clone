@@ -3,7 +3,7 @@ import { makeStyles } from "@material-ui/core/styles";
 import { Side } from "../Layout";
 import { Button, IconButton, Paper, Typography } from "@material-ui/core";
 import ArrowBackIcon from "@material-ui/icons/ArrowBack";
-import AccountAvartar from "../TopNav/AccountAvartar";
+import AccountAvartar from "./AccountAvartar";
 import LabelOutlined from "@material-ui/icons/LabelOutlined";
 import { Divider } from "@material-ui/core";
 import StarOutline from "@material-ui/icons/StarOutline";
@@ -13,6 +13,8 @@ import { useHistory, useLocation, useParams } from "react-router-dom";
 import axios from "axios";
 import ContactDetails from "./ContactDetails";
 import CloseIcon from "@material-ui/icons/Close";
+import ImageUploadBtn from "./ImageUploadBtn";
+import ContactForm from "./ContactForm";
 
 function Detail(props) {
   const query = new URLSearchParams(useLocation().search);
@@ -122,9 +124,9 @@ function Detail(props) {
   };
 
   const handleEdit = () => {
-    history.push("/contacts/" + contact.id + "?edit=1")
-    setEdit(1)
-  }
+    history.push("/contacts/" + contact.id + "?edit=1");
+    setEdit(1);
+  };
   const classes = useStyles();
 
   return (
@@ -140,15 +142,18 @@ function Detail(props) {
           </IconButton>
         )}
         <div className={classes.name}>
-          <AccountAvartar
-            size="xxlarge"
-            link={contact.image}
-            email={contact.first_name}
-          />
+          <div style={{position: "relative"}}>
+            <AccountAvartar
+              size="xxlarge"
+              link={contact.image}
+              email={contact.first_name}
+            />
+            <ImageUploadBtn />
+          </div>
           <div className={classes.info}>
-            <Typography variant="h5">{`${
+            {contact.first_name && <Typography variant="h5">{`${
               contact?.first_name + " " + contact?.last_name
-            }`}</Typography>
+            }`}</Typography>}
             <Typography variant="h6">{contact.job}</Typography>
             <IconButton className={classes.label}>
               <LabelOutlined color="primary" fontSize="small" />
@@ -157,7 +162,12 @@ function Detail(props) {
         </div>
         <div className={classes.actions}>
           {Edit ? (
-            <Button variant="contained" color="primary" disableElevation>
+            <Button
+              variant="contained"
+              color="primary"
+              disableElevation
+              disabled
+            >
               Save
             </Button>
           ) : (
@@ -176,8 +186,7 @@ function Detail(props) {
                 variant="contained"
                 color="primary"
                 disableElevation
-                onClick={handleEdit
-                }
+                onClick={handleEdit}
               >
                 Edit
               </Button>
@@ -188,13 +197,15 @@ function Detail(props) {
       <Divider light />
       <div
         style={{
-          padding: "20px 60px",
-          height: "57vh",
+          padding: "8px 60px",
+          // height: "57vh",
           width: "100%",
           overflowY: "auto",
         }}
       >
-        <ContactDetails contact={contact} />
+        {Edit ? <ContactDetails contact={contact} /> :
+        <ContactForm contact = {contact} />
+        }
       </div>
     </main>
   );

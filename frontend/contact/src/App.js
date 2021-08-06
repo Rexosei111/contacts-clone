@@ -19,8 +19,9 @@ function App() {
       <Switch>
         <Route path="/" render={() => <Main token={token}/>} exact />
         <Route path="/frequent" render={() => <Main token={token} />} exact />
+        <Route path="/new" render={() => <Detail token={token} />} exact />
         <Route path="/login" render={() => <Login setToken={setToken} token={token} />} exact />
-        <Route path="/contacts/:id" render={() => <Detail token={token} />} exact/>
+        <Route path="/contacts/:id" render={() => <Detail token={token} new={"1"}/>} exact/>
       </Switch>
     </Layout>
   );

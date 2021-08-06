@@ -23,8 +23,11 @@ import { makeStyles } from "@material-ui/core/styles";
 import AddIcon from "@material-ui/icons/Add";
 import PersonOutlineIcon from "@material-ui/icons/PersonOutline";
 import { NavLink } from 'react-router-dom'
+import { useHistory } from "react-router";
 
 function SideBar({fullSide, Contacts}) {
+
+  const history = useHistory()
 
   const [label, setlabel] = useState(true);
   const useStyle = makeStyles((theme) => ({
@@ -60,6 +63,10 @@ function SideBar({fullSide, Contacts}) {
   }));
   const classes = useStyle();
 
+  const handleCreate = () => {
+    history.push("/new")
+  }
+
   const handleLabel = () => {
     setlabel(!label);
   };
@@ -70,6 +77,7 @@ function SideBar({fullSide, Contacts}) {
         startIcon={<AddIcon />}
         className={classes.create}
         elevation={0}
+        onClick={handleCreate}
       >
         Create Contact
       </Button>
