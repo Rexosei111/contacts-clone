@@ -7,7 +7,7 @@ from rest_framework.parsers import MultiPartParser, FormParser, JSONParser
 from rest_framework.authtoken.models import Token
 from rest_framework.permissions import IsAuthenticated
 from rest_framework.authentication import TokenAuthentication
-from django.contrib.auth.models import User
+from django.contrib.auth.models import User, Group
 from rest_framework import generics, filters
 from .models import *
 from .serializers import *
@@ -121,12 +121,11 @@ def UserRegistrationView(request):
     serializer = UserSerializer(data=request.data)
     if serializer.is_valid():
         user = serializer.save()
+        user_group = Group.objects.get(name="Registered Users")
+        user.groups.set([user_group])
         token = Token.objects.get_or_create(user=user)
-        data = {
-            "username": user.username,
-            "email": user.email,
-        }
-        return Response(data, status=status.HTTP_201_CREATED)
+        
+        return Response(status=status.HTTP_201_CREATED)
     return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
 
 class CreateImage(generics.CreateAPIView):

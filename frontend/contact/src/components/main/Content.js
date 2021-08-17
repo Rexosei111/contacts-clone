@@ -12,8 +12,7 @@ import AccountAvartar from "../TopNav/AccountAvartar";
 import clsx from "clsx";
 import Actions from "./Actions";
 import SelectedHeader from "./SelectedHeader";
-import { useHistory } from "react-router";
-import { Link } from "react-router-dom";
+import { useHistory } from "react-router"
 
 const columns = [
   { id: "name", label: "Name", minWidth: 170 },

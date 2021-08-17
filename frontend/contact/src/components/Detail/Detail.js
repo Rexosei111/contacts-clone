@@ -29,7 +29,8 @@ function Detail(props) {
 
   const [Isfav, setIsFav] = useState();
 
-  const [image, setimage] = useState(null)
+  const [image, setimage] = useState(null);
+  const [imageURL, setimageURL] = useState(null);
 
   const useStyles = makeStyles((theme) => ({
     container: {
@@ -100,6 +101,22 @@ function Detail(props) {
   }, [id, props.token]);
 
   useEffect(() => {
+    let formData = new FormData();
+    formData.append("image", image);
+    axios({
+      method: "post",
+      url: "http://localhost:8000/api/contacts/images/upload/",
+      data: formData,
+      headers: {
+        "Content-Type": "multipart/form-data",
+        Authorization: `Token ${props.token}`,
+      },
+    })
+      .then((response) => setimageURL(response.data.image))
+      .catch((err) => console.log(err));
+  }, [props.token, image]);
+
+  useEffect(() => {
     setIsFav(contact.favorite);
   }, [contact]);
 
@@ -131,26 +148,20 @@ function Detail(props) {
   };
 
   const handleSubmit = (e) => {
-    let formData = new FormData();
-    formData.append("first_name", contact.first_name);
-    formData.append("last_name", contact.last_name);
-    formData.append("email", contact.email);
-    formData.append("job", contact.job);
-    formData.append("phone", contact.phone);
-    formData.append("image", image);
-
     axios({
-        method: "PATCH",
-        url: `http://localhost:8000/api/contacts/${contact.id}/update/`,
-        data: formData,
-        headers: {
-          "Content-Type": "multipart/form-data",
-          Authorization: `Token ${props.token}`,
-        },
-      })
+      method: "PATCH",
+      url: `http://localhost:8000/api/contacts/${contact.id}/update/`,
+      data: { ...contact, imageURL: imageURL || contact.imageURL },
+      headers: {
+        "Content-Type": "Application/json",
+        Authorization: `Token ${props.token}`,
+      },
+    })
       .then((response) => {
-        handleContacts([...Contacts, response.data]);
-        setContact({});
+        setContact((prevState) => ({
+          ...prevState,
+          ...response.data,
+        }));
       })
       .catch((err) => {
         console.log(err);
@@ -167,23 +178,25 @@ function Detail(props) {
             <CloseIcon fontSize="small" />
           </IconButton>
         ) : (
-          <IconButton className={classes.backBtn}>
-            <ArrowBackIcon onClick={prevPage} />
+          <IconButton className={classes.backBtn} onClick={prevPage}>
+            <ArrowBackIcon />
           </IconButton>
         )}
         <div className={classes.name}>
-          <div style={{position: "relative"}}>
+          <div style={{ position: "relative" }}>
             <AccountAvartar
               size="xxlarge"
-              link={contact.imageURL ? contact?.imageURL : image}
+              link={imageURL ? imageURL : contact.imageURL}
               email={contact.first_name}
             />
-            <ImageUploadBtn setimage={setimage}/>
+            {Edit ? <ImageUploadBtn setimage={setimage} /> : null}
           </div>
           <div className={classes.info}>
-            {contact.first_name && <Typography variant="h5">{`${
-              contact?.first_name + " " + contact?.last_name
-            }`}</Typography>}
+            {contact.first_name && (
+              <Typography variant="h5">{`${
+                contact?.first_name + " " + contact?.last_name
+              }`}</Typography>
+            )}
             <Typography variant="h6">{contact.job}</Typography>
             <IconButton className={classes.label}>
               <LabelOutlined color="primary" fontSize="small" />
@@ -232,9 +245,15 @@ function Detail(props) {
           overflowY: "auto",
         }}
       >
-        {Edit ? <ContactForm contact={contact} setContact={setContact} image={image} /> :
-        <ContactDetails contact = {contact} setContact={setContact} />
-        }
+        {Edit ? (
+          <ContactForm
+            contact={contact}
+            setContact={setContact}
+            image={image}
+          />
+        ) : (
+          <ContactDetails contact={contact} setContact={setContact} />
+        )}
       </div>
     </main>
   );

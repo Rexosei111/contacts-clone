@@ -1,7 +1,6 @@
 import { Typography, Divider, IconButton } from "@material-ui/core";
 import { makeStyles, TextField, Button } from "@material-ui/core";
 import React, { useState } from "react";
-import FacebookIcon from "@material-ui/icons/Facebook";
 import { InputAdornment } from "@material-ui/core";
 import MailOutlineIcon from "@material-ui/icons/MailOutline";
 import LockOpenIcon from "@material-ui/icons/LockOpen";

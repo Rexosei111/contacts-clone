@@ -1,18 +1,13 @@
 import React, { useEffect, useState } from "react";
 import { makeStyles } from "@material-ui/core";
 import { Side } from "../Layout";
-import { Button, IconButton, Paper, Typography } from "@material-ui/core";
+import { Button, IconButton, Paper} from "@material-ui/core";
 import ArrowBackIcon from "@material-ui/icons/ArrowBack";
 import AccountAvartar from "../Detail/AccountAvartar";
 import LabelOutlined from "@material-ui/icons/LabelOutlined";
 import { Divider } from "@material-ui/core";
-import StarOutline from "@material-ui/icons/StarOutline";
-import StarIcon from "@material-ui/icons/Star";
-import Menu from "../Menu";
-import { useHistory, useLocation, useParams } from "react-router-dom";
+import { useHistory} from "react-router-dom";
 import axios from "axios";
-import ContactDetails from "../Detail/ContactDetails";
-import CloseIcon from "@material-ui/icons/Close";
 import ImageUploadBtn from "../Detail/ImageUploadBtn";
 import ContactForm from "../Detail/ContactForm";
 
@@ -74,7 +69,7 @@ function NewContact(props) {
   };
 
   const [image, setimage] = useState(null);
-  const [imageURL, setimageURL] = useState(null)
+  const [imageURL, setimageURL] = useState()
 
   useEffect(() => {
     let formData = new FormData();
@@ -94,13 +89,6 @@ function NewContact(props) {
   }, [props.token,image]);
 
   const handleSubmit = (e) => {
-    // let formData = new FormData();
-    // formData.append("first_name", contact.first_name);
-    // formData.append("last_name", contact.last_name);
-    // formData.append("email", contact.email);
-    // formData.append("job", contact.job);
-    // formData.append("phone", contact.phone);
-    // formData.append("image", imageURL);
 
     axios({
       method: "post",

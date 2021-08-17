@@ -11,12 +11,10 @@ import CloseIcon from "@material-ui/icons/Close";
 import BusinessIcon from "@material-ui/icons/Business";
 import PhoneOutlinedIcon from "@material-ui/icons/PhoneOutlined";
 import MailOutlineIcon from "@material-ui/icons/MailOutline";
-import axios from "axios";
 
 const useStyles = makeStyles((theme) => ({
   paper: {
     padding: "5px",
-    // border: "1px solid #e0e0e0",
     maxWidth: "570px",
     display: "flex",
     flexDirection: "column",

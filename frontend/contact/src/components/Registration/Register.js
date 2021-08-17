@@ -1,5 +1,5 @@
 import React from "react";
-import LoginForm from "./Form";
+import RegistrationForm from "./RegistrationForm";
 import { makeStyles } from '@material-ui/core/styles'
 import useMediaQuery from '@material-ui/core/useMediaQuery';
 import {
@@ -10,7 +10,7 @@ import {
   import DonutLargeIcon from "@material-ui/icons/DonutLarge";
 import { Redirect } from "react-router-dom";
 
-function Login({setToken, token}) {
+function Register({setToken, token}) {
     const matches = useMediaQuery('(max-width: 600px)');
 
     const useStyle = makeStyles((theme) => ({
@@ -41,11 +41,11 @@ function Login({setToken, token}) {
       <Container maxWidth="sm" className={classes.container}>
         <Paper className={classes.paper} elevation={0}>
           <DonutLargeIcon fontSize="large" />
-          <Typography variant="h5">Login Form</Typography>
-         <LoginForm setToken={setToken} token={token}/>
+          <Typography variant="h5">Registration Form</Typography>
+         <RegistrationForm setToken={setToken} token={token}/>
         </Paper>
       </Container>
   );
 }
 
-export default Login;
+export default Register;

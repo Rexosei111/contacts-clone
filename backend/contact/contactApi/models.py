@@ -27,7 +27,7 @@ class Contact(models.Model):
     first_name = models.CharField(max_length=50)
     last_name = models.CharField(max_length=50, null=True, blank=True)
     email = models.EmailField(null=True, blank=True)
-    imageURL = models.URLField()
+    imageURL = models.URLField(null=True, blank=True)
     phone = models.CharField(max_length=15, null=True, blank=True)
     date_of_birth = models.DateField(null=True, blank=True)
     job = models.CharField(max_length=50, null=True, blank=True)
