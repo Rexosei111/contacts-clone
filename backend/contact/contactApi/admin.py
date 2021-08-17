@@ -6,7 +6,7 @@ class ContactAdmin(admin.ModelAdmin):
     fieldsets = (
         (None, {
             'fields': (
-                'user', 'first_name', 'last_name', 'image',
+                'user', 'first_name', 'last_name', 'imageURL',
             )
         }),
         ('More Info', {
@@ -19,3 +19,4 @@ class ContactAdmin(admin.ModelAdmin):
 admin.site.register(Contact, ContactAdmin)
 
 admin.site.register(Label)
+admin.site.register(Images)

@@ -177,14 +177,6 @@ function Form({setToken}) {
       <IconButton className={classes.google}>
         <Typography variant="h6">G</Typography>
       </IconButton>
-      {/* <Button
-        variant="outlined"
-        startIcon={<FacebookIcon />}
-        color="Secondary"
-        disableElevation
-        component="a">
-        google
-      </Button> */}
     </form>
     </>
   );

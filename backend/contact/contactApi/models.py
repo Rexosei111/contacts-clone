@@ -6,7 +6,6 @@ from phonenumber_field.modelfields import PhoneNumberField
 from django.dispatch import receiver
 from rest_framework.authtoken.models import Token
 
-# Create your models here.
 @receiver(post_save, sender=settings.AUTH_USER_MODEL)
 def create_auth_token(sender, instance=None, created=False, **kwargs):
     if created:
@@ -28,7 +27,7 @@ class Contact(models.Model):
     first_name = models.CharField(max_length=50)
     last_name = models.CharField(max_length=50, null=True, blank=True)
     email = models.EmailField(null=True, blank=True)
-    image = models.ImageField(upload_to="contact-images", null=True, blank=True)
+    imageURL = models.URLField()
     phone = models.CharField(max_length=15, null=True, blank=True)
     date_of_birth = models.DateField(null=True, blank=True)
     job = models.CharField(max_length=50, null=True, blank=True)
@@ -41,3 +40,5 @@ class Contact(models.Model):
     def __str__(self):
         return f"{self.first_name} {self.last_name}"
 
+class Images(models.Model):
+    image = models.ImageField(upload_to="contact-images", null=True, blank=False)

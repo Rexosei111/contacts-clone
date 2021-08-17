@@ -11,6 +11,7 @@ import CloseIcon from "@material-ui/icons/Close";
 import BusinessIcon from "@material-ui/icons/Business";
 import PhoneOutlinedIcon from "@material-ui/icons/PhoneOutlined";
 import MailOutlineIcon from "@material-ui/icons/MailOutline";
+import axios from "axios";
 
 const useStyles = makeStyles((theme) => ({
   paper: {
@@ -29,9 +30,21 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
+
 function ContactForm(props) {
   const clasess = useStyles();
 
+  const handleChange = (e) => {
+    const { name, value } = e.target;
+    props.setContact((prevState) => ({
+      ...prevState,
+      [name]: value,
+    })
+    );
+  };
+
+  
+  
   return (
     <Paper className={clasess.paper} elevation={0}>
       <form method="post">
@@ -50,7 +63,9 @@ function ContactForm(props) {
               <TextField
                 id="first_name"
                 label="First Name"
-                value={props.contact.first_name}
+                name="first_name"
+                onChange={handleChange}
+                value={props?.contact.first_name}
                 fullWidth
                 InputLabelProps={{
                   style: { fontSize: 14 },
@@ -71,8 +86,10 @@ function ContactForm(props) {
               <TextField
                 id="LName"
                 label="Last Name"
+                name="last_name"
+                onChange={handleChange}
                 fullWidth
-                value={props.contact.last_name}
+                value={props?.contact.last_name}
                 InputLabelProps={{
                   style: { fontSize: 14 },
                 }}
@@ -96,6 +113,8 @@ function ContactForm(props) {
               <TextField
                 id="company"
                 label="Company"
+                name="company"
+                onChange={handleChange}
                 fullWidth
                 InputLabelProps={{
                   style: { fontSize: 14 },
@@ -116,7 +135,9 @@ function ContactForm(props) {
               <TextField
                 id="last Name"
                 label="Job"
-                value={props.contact.job}
+                name="job"
+                onChange={handleChange}
+                value={props?.contact.job}
                 fullWidth
                 InputLabelProps={{
                   style: { fontSize: 14 },
@@ -141,7 +162,9 @@ function ContactForm(props) {
               <TextField
                 id="Email"
                 label="Email"
-                value={props.contact.email}
+                name="email"
+                onChange={handleChange}
+                value={props?.contact.email}
                 fullWidth
                 InputLabelProps={{
                   style: { fontSize: 14 },
@@ -163,7 +186,9 @@ function ContactForm(props) {
               <TextField
                 id="Phone"
                 label="Phone Number"
-                value={props.contact.phone}
+                name="phone"
+                onChange={handleChange}
+                value={props?.contact.phone}
                 fullWidth
                 InputLabelProps={{
                   style: { fontSize: 14 },

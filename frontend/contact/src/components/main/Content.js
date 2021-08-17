@@ -171,7 +171,7 @@ function Content({ Contacts, token }) {
                       />
                     ) : (
                       <AccountAvartar
-                        link={contact.image}
+                        link={contact.imageURL}
                         size="small"
                         email={contact.first_name}
                       />

@@ -29,6 +29,8 @@ function Detail(props) {
 
   const [Isfav, setIsFav] = useState();
 
+  const [image, setimage] = useState(null)
+
   const useStyles = makeStyles((theme) => ({
     container: {
       marginLeft: fullSide ? 265 : 0,
@@ -127,6 +129,34 @@ function Detail(props) {
     history.push("/contacts/" + contact.id + "?edit=1");
     setEdit(1);
   };
+
+  const handleSubmit = (e) => {
+    let formData = new FormData();
+    formData.append("first_name", contact.first_name);
+    formData.append("last_name", contact.last_name);
+    formData.append("email", contact.email);
+    formData.append("job", contact.job);
+    formData.append("phone", contact.phone);
+    formData.append("image", image);
+
+    axios({
+        method: "PATCH",
+        url: `http://localhost:8000/api/contacts/${contact.id}/update/`,
+        data: formData,
+        headers: {
+          "Content-Type": "multipart/form-data",
+          Authorization: `Token ${props.token}`,
+        },
+      })
+      .then((response) => {
+        handleContacts([...Contacts, response.data]);
+        setContact({});
+      })
+      .catch((err) => {
+        console.log(err);
+        setContact({});
+      });
+  };
   const classes = useStyles();
 
   return (
@@ -145,10 +175,10 @@ function Detail(props) {
           <div style={{position: "relative"}}>
             <AccountAvartar
               size="xxlarge"
-              link={contact.image}
+              link={contact.imageURL ? contact?.imageURL : image}
               email={contact.first_name}
             />
-            <ImageUploadBtn />
+            <ImageUploadBtn setimage={setimage}/>
           </div>
           <div className={classes.info}>
             {contact.first_name && <Typography variant="h5">{`${
@@ -166,7 +196,7 @@ function Detail(props) {
               variant="contained"
               color="primary"
               disableElevation
-              disabled
+              onClick={handleSubmit}
             >
               Save
             </Button>
@@ -198,13 +228,12 @@ function Detail(props) {
       <div
         style={{
           padding: "8px 60px",
-          // height: "57vh",
           width: "100%",
           overflowY: "auto",
         }}
       >
-        {Edit ? <ContactDetails contact={contact} /> :
-        <ContactForm contact = {contact} />
+        {Edit ? <ContactForm contact={contact} setContact={setContact} image={image} /> :
+        <ContactDetails contact = {contact} setContact={setContact} />
         }
       </div>
     </main>

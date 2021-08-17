@@ -19,8 +19,12 @@ const useStyles = makeStyles({
   }
 });
 
-function ImageUploadBtn() {
+function ImageUploadBtn(props) {
   const classes = useStyles();
+
+  const handleChange = (e) => {
+    props.setimage(e.target.files[0])
+  }
 
   return (
     <div className={classes.imageUploader}> 
@@ -28,6 +32,7 @@ function ImageUploadBtn() {
         accept="image/*"
         className={classes.input}
         id="icon-button-file"
+        onChange={handleChange}
         type="file"
       />
       <label htmlFor="icon-button-file">

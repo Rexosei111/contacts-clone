@@ -12,10 +12,14 @@ class ContactSerializer(serializers.ModelSerializer):
         model = Contact
         fields = [
             'id', 'first_name',
-            'last_name', 'email', 'image', 'date_of_birth',
+            'last_name', 'email', 'imageURL', 'date_of_birth',
             'job', 'phone', 'favorite'
         ]
 
+class ImageSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Images
+        fields = "__all__"
 
 class UserSerializer(serializers.ModelSerializer):
     password2 = serializers.CharField(

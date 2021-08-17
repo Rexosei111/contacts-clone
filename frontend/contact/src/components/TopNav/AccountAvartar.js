@@ -1,5 +1,5 @@
-import React, {useContext, useState} from "react";
-import { Avatar, Typography } from "@material-ui/core";
+import React, {useContext} from "react";
+import { Avatar} from "@material-ui/core";
 import { makeStyles } from "@material-ui/core/styles";
 import clsx from "clsx";
 import {Side} from '../Layout'
@@ -16,7 +16,6 @@ const useStyles = makeStyles((theme) => ({
   },
   fallback: {
     fontSize: theme.spacing(10),
-    // backgroundColor: getColorCode()
   },
   av: {
     backgroundColor: "#ef43b2"

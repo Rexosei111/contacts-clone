@@ -2,7 +2,7 @@ from django.urls import path
 from .views import (
     ContactListView, CreateContactView, 
     ContactDetailView, UserRegistrationView,
-    ContactUpdateView, ContactDeleteView, GetUserToken, FavoriteContact, DetailContactView
+    ContactUpdateView, ContactDeleteView, GetUserToken, FavoriteContact, DetailContactView, CreateImage
 ) 
 from rest_framework.authtoken import views as auth_views
 
@@ -13,6 +13,7 @@ urlpatterns = [
     path('contacts/create/', CreateContactView, name = "create"),
     path('contacts/<int:pk>/', DetailContactView.as_view(), name="detail"),
     path('contacts/<int:pk>/update/', ContactUpdateView, name="update"),
+    path('contacts/images/upload/', CreateImage.as_view(), name="create_image"),
     path('contacts/<int:pk>/delete/', ContactDeleteView, name="delete"),
     path('contacts/<int:pk>/fav/', FavoriteContact, name="favorite"),
     path('register/', UserRegistrationView, name="register"),

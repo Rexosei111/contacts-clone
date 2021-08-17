@@ -12,8 +12,6 @@ from rest_framework import generics, filters
 from .models import *
 from .serializers import *
 
-# Create your views here.
-
 
 class ContactListView(generics.ListAPIView):
     serializer_class = ContactSerializer
@@ -30,11 +28,12 @@ class ContactListView(generics.ListAPIView):
 
 @api_view(["POST"])
 @permission_classes([IsAuthenticated, ])
-@parser_classes([MultiPartParser, FormParser])
+@parser_classes([JSONParser])
 def CreateContactView(request):
     user = request.user
     contact = Contact(user=user)
     serializer = ContactSerializer(contact, data=request.data)
+    print(serializer)
     if serializer.is_valid():
         contact = serializer.save()
         return Response(serializer.data, status=status.HTTP_201_CREATED)
@@ -97,9 +96,9 @@ def FavoriteContact(request, pk):
         return Response({"success": "Update Successful"}, status=status.HTTP_200_OK)
     return Response({"error": "Update Unsuccesful"})
 
-@api_view(["PUT", "PATCH"])
+@api_view(["PATCH"])
 @permission_classes([IsAuthenticated])
-# @parser_classes([MultiPartParser, FormParser])
+@parser_classes([JSONParser])
 def ContactUpdateView(request, pk):
     try:
         contact = Contact.objects.get(pk=pk)
@@ -130,6 +129,10 @@ def UserRegistrationView(request):
         return Response(data, status=status.HTTP_201_CREATED)
     return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
 
+class CreateImage(generics.CreateAPIView):
+    serializer_class = ImageSerializer
+    permission_classes = [IsAuthenticated]
+    parser_classes = [MultiPartParser, FormParser]
 
 class GetUserToken(ObtainAuthToken):
 
