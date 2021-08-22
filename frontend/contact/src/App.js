@@ -9,8 +9,6 @@ import Detail from "./components/Detail/Detail";
 import NewContact from "./components/New/NewContact";
 import Register from "./components/Registration/Register";
 
-
-
 function App() {
 
   const {token, setToken} = useToken()
@@ -24,7 +22,7 @@ function App() {
         <Route path="/new" render={() => <NewContact token={token} />} exact />
         <Route path="/login" render={() => <Login setToken={setToken} token={token} />} exact />
         <Route path="/register" render={() => <Register setToken={setToken} token={token} />} exact />
-        <Route path="/contacts/:id" render={() => <Detail token={token} new={"1"}/>} exact/>
+        <Route path="/contacts/:id" render={() => <Detail token={token} />} exact/>
       </Switch>
     </Layout>
   );

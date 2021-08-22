@@ -1,28 +1,46 @@
-import React, { useEffect} from "react";
+import React, { useEffect } from "react";
 import { makeStyles } from "@material-ui/core/styles";
 import Content from "./Content";
 import { Side } from "../Layout";
-import { Redirect } from "react-router-dom";
+import { Redirect, useHistory } from "react-router-dom";
 import axios from "axios";
-
+import Fab from "@material-ui/core/Fab";
+import AddIcon from "@material-ui/icons/Add";
+import clsx from "clsx";
+import { useMediaQuery } from "@material-ui/core";
 
 function Main({ token }) {
-  // const [contacts, handleContacts] = useState([]);
   const { fullSide, Contacts, handleContacts } = React.useContext(Side);
   const useStyles = makeStyles((theme) => ({
     container: {
       marginLeft: fullSide ? 265 : 0,
       overflowX: "hidden",
       height: "90vh",
-      padding: "5px 10px",
+      // padding: "5px 10px",
       backgroundColor: "#ffffff",
+    },
+    fab: {
+      position: "absolute",
+      visibility: "hidden",
+      width: theme.spacing(6),
+      height: theme.spacing(6),
+      bottom: 10,
+      right: 10,
+    },
+    show: {
+      visibility: "visible",
     },
   }));
 
+  const history = useHistory();
+
+  const handleClick = () => {
+    history.push("/new");
+  };
   const classes = useStyles();
+  const show = useMediaQuery("(max-width: 600px)");
 
   useEffect(() => {
-    
     if (token) {
       axios({
         method: "get",
@@ -48,6 +66,14 @@ function Main({ token }) {
   return (
     <main className={classes.container}>
       <Content Contacts={Contacts} token={token} />
+      <Fab
+        color="primary"
+        aria-label="Add New Contact"
+        onClick={handleClick}
+        className={clsx({ [classes.fab]: true, [classes.show]: show })}
+      >
+        <AddIcon fontSize="small" />
+      </Fab>
     </main>
   );
 }

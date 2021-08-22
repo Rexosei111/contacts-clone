@@ -86,7 +86,6 @@ def FavoriteContact(request, pk):
     except Contact.DoesNotExist:
         return Response({"message": "Contact Not Found"}, status=status.HTTP_404_NOT_FOUND)
 
-    print(contact.favorite)
     if contact.favorite:
         contact.favorite = False
         contact.save()

@@ -8,7 +8,7 @@ import {
     Paper,
   } from "@material-ui/core";
   import DonutLargeIcon from "@material-ui/icons/DonutLarge";
-import { Redirect } from "react-router-dom";
+import { Link, Redirect } from "react-router-dom";
 
 function Register({setToken, token}) {
     const matches = useMediaQuery('(max-width: 600px)');
@@ -43,6 +43,7 @@ function Register({setToken, token}) {
           <DonutLargeIcon fontSize="large" />
           <Typography variant="h5">Registration Form</Typography>
          <RegistrationForm setToken={setToken} token={token}/>
+         <Link to="/login" style={{alignSelf: "flex-start"}}>Already have an account?</Link>
         </Paper>
       </Container>
   );

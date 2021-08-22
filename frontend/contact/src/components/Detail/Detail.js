@@ -162,6 +162,8 @@ function Detail(props) {
           ...prevState,
           ...response.data,
         }));
+        setEdit(0);
+        history.push(`/contacts/${contact.id}`);
       })
       .catch((err) => {
         console.log(err);
@@ -224,7 +226,7 @@ function Detail(props) {
               ) : (
                 <StarOutline fontSize="small" onClick={handleFavorite} />
               )}
-              <Menu />
+              <Menu Contacts={Contacts} handleContacts={handleContacts} id={id} token={props.token} />
               <Button
                 variant="contained"
                 color="primary"

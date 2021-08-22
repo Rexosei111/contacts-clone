@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { Button} from "@material-ui/core";
+import { Button } from "@material-ui/core";
 import List from "@material-ui/core/List";
 import ListItem from "@material-ui/core/ListItem";
 import ListItemIcon from "@material-ui/core/ListItemIcon";
@@ -10,33 +10,35 @@ import AssistantOutlinedIcon from "@material-ui/icons/AssistantOutlined";
 import ExpandLessOutlinedIcon from "@material-ui/icons/ExpandLessOutlined";
 import ExpandMoreOutlinedIcon from "@material-ui/icons/ExpandMoreOutlined";
 import DeleteOutlineOutlinedIcon from "@material-ui/icons/DeleteOutlineOutlined";
-import AssignmentReturnedOutlinedIcon from '@material-ui/icons/AssignmentReturnedOutlined';
-import PrintOutlinedIcon from '@material-ui/icons/PrintOutlined';
-import BackupOutlinedIcon from '@material-ui/icons/BackupOutlined';
-import PublishOutlinedIcon from '@material-ui/icons/PublishOutlined';
+import AssignmentReturnedOutlinedIcon from "@material-ui/icons/AssignmentReturnedOutlined";
+import PrintOutlinedIcon from "@material-ui/icons/PrintOutlined";
+import BackupOutlinedIcon from "@material-ui/icons/BackupOutlined";
+import PublishOutlinedIcon from "@material-ui/icons/PublishOutlined";
 import EditOutlinedIcon from "@material-ui/icons/EditOutlined";
 import LabelOutlinedIcon from "@material-ui/icons/LabelOutlined";
-import ListItemSecondaryAction from '@material-ui/core/ListItemSecondaryAction';
+import ListItemSecondaryAction from "@material-ui/core/ListItemSecondaryAction";
 import Collapse from "@material-ui/core/Collapse";
 import { Paper } from "@material-ui/core";
 import { makeStyles } from "@material-ui/core/styles";
 import AddIcon from "@material-ui/icons/Add";
 import PersonOutlineIcon from "@material-ui/icons/PersonOutline";
-import { NavLink } from 'react-router-dom'
+import { NavLink } from "react-router-dom";
 import { useHistory } from "react-router";
 
-function SideBar({fullSide, Contacts}) {
-
-  const history = useHistory()
+function SideBar({ fullSide, Contacts, setfullSide }) {
+  const history = useHistory();
 
   const [label, setlabel] = useState(true);
   const useStyle = makeStyles((theme) => ({
-
     paper: {
-      width: 265,
+      width: 280,
+      boxSizing: "border-box",
+      paddingRight: 10,
       height: "100vh",
       position: "fixed",
-      left: fullSide ? 0 : -280
+      left: fullSide ? 0 : -280,
+      // backgroundColor: "#000000",
+      zIndex: 20
     },
     create: {
       height: 50,
@@ -49,23 +51,23 @@ function SideBar({fullSide, Contacts}) {
     listitem: {
       borderRadius: "0 30px 30px 0",
       padding: "5px 25px",
-      '&.active': {
-        backgroundColor: '#e8f0fe',
-        color: '#1967d2'
-      }
+      "&.active": {
+        backgroundColor: "#e8f0fe",
+        color: "#1967d2",
+      },
     },
     secondaryAction: {
-      color: "#1967d2"
+      color: "#1967d2",
     },
     actionIcons: {
-      color: "#5f6368"
-    }
+      color: "#5f6368",
+    },
   }));
   const classes = useStyle();
 
   const handleCreate = () => {
-    history.push("/new")
-  }
+    history.push("/new");
+  };
 
   const handleLabel = () => {
     setlabel(!label);
@@ -82,22 +84,35 @@ function SideBar({fullSide, Contacts}) {
         Create Contact
       </Button>
       <List dense={true} className={classes.list}>
-        <ListItem button component={NavLink} exact to="/" className={classes.listitem}>
+        <ListItem
+          button
+          component={NavLink}
+          exact
+          to="/"
+          className={classes.listitem}
+        >
           <ListItemIcon>
             <PersonOutlineIcon fontSize="small" />
           </ListItemIcon>
           <ListItemText>Contact</ListItemText>
-          <ListItemSecondaryAction className={classes.secondaryAction}>{Contacts.length}</ListItemSecondaryAction>
+          <ListItemSecondaryAction className={classes.secondaryAction}>
+            {Contacts.length}
+          </ListItemSecondaryAction>
         </ListItem>
-        <ListItem button component={NavLink} to="/frequent" className={classes.listitem}>
+        <ListItem
+          button
+          component={NavLink}
+          to="/frequent"
+          className={classes.listitem}
+        >
           <ListItemIcon>
-            <HistoryIcon fontSize="small"/>
+            <HistoryIcon fontSize="small" />
           </ListItemIcon>
           <ListItemText>Frequently Contacted</ListItemText>
         </ListItem>
         <ListItem button component="a" href="#" className={classes.listitem}>
           <ListItemIcon>
-            <AssistantOutlinedIcon fontSize="small"/>
+            <AssistantOutlinedIcon fontSize="small" />
           </ListItemIcon>
           <ListItemText>Merge and Fix</ListItemText>
         </ListItem>
@@ -112,7 +127,11 @@ function SideBar({fullSide, Contacts}) {
           onClick={handleLabel}
         >
           <ListItemIcon>
-            {label ? <ExpandLessOutlinedIcon fontSize="small"/> : <ExpandMoreOutlinedIcon fontSize="small"/>}
+            {label ? (
+              <ExpandLessOutlinedIcon fontSize="small" />
+            ) : (
+              <ExpandMoreOutlinedIcon fontSize="small" />
+            )}
           </ListItemIcon>
           <ListItemText>Label</ListItemText>
         </ListItem>
@@ -125,11 +144,17 @@ function SideBar({fullSide, Contacts}) {
               className={classes.listitem}
             >
               <ListItemIcon>
-                <LabelOutlinedIcon fontSize="small"/>
+                <LabelOutlinedIcon fontSize="small" />
               </ListItemIcon>
               <ListItemText primary="ICE" />
-              <EditOutlinedIcon fontSize="small" className={classes.actionIcons}/>
-              <DeleteOutlineOutlinedIcon fontSize="small" className={classes.actionIcons}/>
+              <EditOutlinedIcon
+                fontSize="small"
+                className={classes.actionIcons}
+              />
+              <DeleteOutlineOutlinedIcon
+                fontSize="small"
+                className={classes.actionIcons}
+              />
             </ListItem>
             <ListItem
               button
@@ -138,7 +163,7 @@ function SideBar({fullSide, Contacts}) {
               className={classes.listitem}
             >
               <ListItemIcon>
-                <AddIcon fontSize="small"/>
+                <AddIcon fontSize="small" />
               </ListItemIcon>
               <ListItemText>Create Label</ListItemText>
             </ListItem>
@@ -149,19 +174,19 @@ function SideBar({fullSide, Contacts}) {
       <List dense={true} className={classes.list}>
         <ListItem button component="a" href="#" className={classes.listitem}>
           <ListItemIcon>
-            <PublishOutlinedIcon fontSize="small"/>
+            <PublishOutlinedIcon fontSize="small" />
           </ListItemIcon>
           <ListItemText>Import</ListItemText>
         </ListItem>
         <ListItem button component="a" href="#" className={classes.listitem}>
           <ListItemIcon>
-            <BackupOutlinedIcon fontSize="small"/>
+            <BackupOutlinedIcon fontSize="small" />
           </ListItemIcon>
           <ListItemText>Export</ListItemText>
         </ListItem>
         <ListItem button component="a" href="#" className={classes.listitem}>
           <ListItemIcon>
-            <PrintOutlinedIcon fontSize="small"/>
+            <PrintOutlinedIcon fontSize="small" />
           </ListItemIcon>
           <ListItemText>Print</ListItemText>
         </ListItem>
@@ -170,17 +195,17 @@ function SideBar({fullSide, Contacts}) {
       <List dense={true} className={classes.list}>
         <ListItem button component="a" href="#" className={classes.listitem}>
           <ListItemIcon>
-            <AssignmentReturnedOutlinedIcon fontSize="small"/>
+            <AssignmentReturnedOutlinedIcon fontSize="small" />
           </ListItemIcon>
           <ListItemText>Other Contacts</ListItemText>
         </ListItem>
         <ListItem button component="a" href="#" className={classes.listitem}>
           <ListItemIcon>
-            <DeleteOutlineOutlinedIcon fontSize="small"/>
+            <DeleteOutlineOutlinedIcon fontSize="small" />
           </ListItemIcon>
           <ListItemText>Bin</ListItemText>
         </ListItem>
-        </List>
+      </List>
     </Paper>
   );
 }

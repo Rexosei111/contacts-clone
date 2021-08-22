@@ -104,7 +104,7 @@ function Form({setToken}) {
           InputProps={{
             startAdornment: (
               <InputAdornment position="start">
-                <MailOutlineIcon />
+                <MailOutlineIcon color="action"/>
               </InputAdornment>
             ),
             endAdornment:
@@ -137,7 +137,7 @@ function Form({setToken}) {
           InputProps={{
             startAdornment: (
               <InputAdornment position="start">
-                <LockOpenIcon />
+                <LockOpenIcon color="action"/>
               </InputAdornment>
             ),
             endAdornment:
@@ -148,7 +148,7 @@ function Form({setToken}) {
               ) : (
                 <InputAdornment position="end">
                   <IconButton onClick={() => setViewPassword(!ViewPassword)}>
-                  {ViewPassword ? <VisibilityOffIcon /> : <VisibilityIcon />}
+                  {ViewPassword ? <VisibilityOffIcon color="action"/> : <VisibilityIcon color="action"/>}
                   </IconButton>
                 </InputAdornment>
               )   
@@ -164,7 +164,7 @@ function Form({setToken}) {
       >
         Sign In
       </Button>
-      <Typography variant="caption" color="textSecondary" align="center">
+      {/* <Typography variant="caption" color="textSecondary" align="center">
         <div className={classes.divider}>
           <Divider />
           <Typography variant="caption" color="textSecondary">
@@ -175,7 +175,7 @@ function Form({setToken}) {
       </Typography>
       <IconButton className={classes.google}>
         <Typography variant="h6">G</Typography>
-      </IconButton>
+      </IconButton> */}
     </form>
     </>
   );

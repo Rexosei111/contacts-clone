@@ -26,7 +26,7 @@ const useStyles = makeStyles({
 });
 
 function Actions({ fav, Contacts, token, id }) {
-  const { setContacts } = useContext(Side);
+  const { handleContacts } = useContext(Side);
   const [isFav, setIsFav] = useState(fav);
 
   useEffect(() => {
@@ -82,7 +82,7 @@ function Actions({ fav, Contacts, token, id }) {
 
       <EditOutlinedIcon fontSize="small" onClick={() => history.push("/contacts/"+ id + "?edit=1")} />
       {/* <DeleteOutlinedIcon fontSize="small" onClick={handleDelete} /> */}
-      <Menu />
+      <Menu id={id} handleContacts={handleContacts} token={token}/>
     </span>
   );
 }

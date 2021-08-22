@@ -138,7 +138,7 @@ function RegistrationForm({ setToken }) {
             InputProps={{
               startAdornment: (
                 <InputAdornment position="start">
-                  <AccountCircleRounded />
+                  <AccountCircleRounded color="action"/>
                 </InputAdornment>
               ),
               endAdornment:
@@ -169,7 +169,7 @@ function RegistrationForm({ setToken }) {
             InputProps={{
               startAdornment: (
                 <InputAdornment position="start">
-                  <MailOutlineIcon />
+                  <MailOutlineIcon color="action"/>
                 </InputAdornment>
               ),
               endAdornment:
@@ -202,7 +202,7 @@ function RegistrationForm({ setToken }) {
             InputProps={{
               startAdornment: (
                 <InputAdornment position="start">
-                  <LockOpenIcon />
+                  <LockOpenIcon color="action"/>
                 </InputAdornment>
               ),
               endAdornment:
@@ -214,9 +214,9 @@ function RegistrationForm({ setToken }) {
                   <InputAdornment position="end">
                     <IconButton onClick={() => setViewPassword(!ViewPassword)}>
                       {ViewPassword ? (
-                        <VisibilityOffIcon />
+                        <VisibilityOffIcon color="action"/>
                       ) : (
-                        <VisibilityIcon />
+                        <VisibilityIcon color="action"/>
                       )}
                     </IconButton>
                   </InputAdornment>
@@ -244,7 +244,7 @@ function RegistrationForm({ setToken }) {
             InputProps={{
               startAdornment: (
                 <InputAdornment position="start">
-                  <LockOpenIcon />
+                  <LockOpenIcon color="action"/>
                 </InputAdornment>
               ),
               endAdornment:
@@ -256,9 +256,9 @@ function RegistrationForm({ setToken }) {
                   <InputAdornment position="end">
                     <IconButton onClick={() => setViewPassword(!ViewPassword)}>
                       {ViewPassword ? (
-                        <VisibilityOffIcon />
+                        <VisibilityOffIcon color="action"/>
                       ) : (
-                        <VisibilityIcon />
+                        <VisibilityIcon color="action"/>
                       )}
                     </IconButton>
                   </InputAdornment>
@@ -275,7 +275,7 @@ function RegistrationForm({ setToken }) {
         >
           Sign Up
         </Button>
-        <Typography variant="caption" color="textSecondary" align="center">
+        {/* <Typography variant="caption" color="textSecondary" align="center">
           <div className={classes.divider}>
             <Divider />
             <Typography variant="caption" color="textSecondary">
@@ -286,7 +286,7 @@ function RegistrationForm({ setToken }) {
         </Typography>
         <IconButton className={classes.google}>
           <Typography variant="h6">G</Typography>
-        </IconButton>
+        </IconButton> */}
       </form>
     </>
   );

@@ -7,18 +7,34 @@ import ListItemIcon from "@material-ui/core/ListItemIcon";
 import ListItemText from "@material-ui/core/ListItemText";
 import DeleteOutlineOutlinedIcon from "@material-ui/icons/DeleteOutlineOutlined";
 import AssignmentReturnedOutlinedIcon from "@material-ui/icons/AssignmentReturnedOutlined";
-
+import axios from "axios";
 import BackupOutlinedIcon from "@material-ui/icons/BackupOutlined";
-
 import PrintOutlined from "@material-ui/icons/PrintOutlined";
 
-function MoreMenu() {
+function MoreMenu({id, Contacts, handleContacts, token}) {
   const [anchorEl, setanchorEl] = useState(null);
 
   const handleClick = (e) => {
     setanchorEl(e.currentTarget);
     e.stopPropagation();
   };
+
+  const handleDelete = (e) => {
+    
+      handleClose(e)
+      axios({
+        method: "DELETE",
+        url: `http://localhost:8000/api/contacts/${id}/delete/`,
+        headers: {
+          "content-type": "application/json",
+          Authorization: `Token ${token}`,
+        },
+      })
+        .then((response) => {
+          handleContacts(Contacts.filter((contact) => contact.id !== id));
+        })
+        .catch((error) => console.log(error));
+    };
 
   const handleClose = (e) => {
     setanchorEl(null);
@@ -59,7 +75,7 @@ function MoreMenu() {
           </ListItemIcon>
           <ListItemText>Hide from Contacts</ListItemText>
         </MenuItem>
-        <MenuItem onClick={handleClose}>
+        <MenuItem onClick={handleDelete}>
           <ListItemIcon>
             <DeleteOutlineOutlinedIcon fontSize="small" />
           </ListItemIcon>

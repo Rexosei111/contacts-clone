@@ -1,3 +1,4 @@
+import { useMediaQuery } from "@material-ui/core";
 import React, { useCallback, useState, useEffect } from "react";
 import { useLocation } from "react-router-dom";
 import Sidebar from "./SideNav/SideBar";
@@ -24,10 +25,10 @@ export const Side = React.createContext();
 function Layout({ children }) {
   const { pathname } = useLocation();
   const isAuth = pathname === "/login" || pathname === "/register";
-  const [fullSide, setfullSide] = useState(true);
+  const [fullSide, setfullSide] = useState();
   const [Contacts, setContacts] = useState([]);
   const [colorCodes, setcolorCodes] = useState({});
-
+  
   useEffect(() => {
     const alphabets = alphabetArray();
     const fallbackColorCode = fallbackColors(alphabets);
@@ -44,7 +45,7 @@ function Layout({ children }) {
         {!isAuth && (
           <>
             <TopNav setfullSide={setfullSide} fullSide={fullSide} />
-            <Sidebar fullSide={fullSide} Contacts={Contacts} />
+            <Sidebar fullSide={fullSide} Contacts={Contacts} setfullSide={setfullSide} />
           </>
         )}
         {children}

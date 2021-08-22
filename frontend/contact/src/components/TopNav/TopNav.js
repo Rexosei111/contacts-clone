@@ -1,11 +1,12 @@
 import React, { useEffect, useState } from "react";
 import AppBar from "@material-ui/core/AppBar/AppBar";
 import ToolBar from "@material-ui/core/Toolbar/Toolbar";
-import { IconButton, Typography, makeStyles } from "@material-ui/core";
+import { IconButton, Typography, makeStyles, useMediaQuery } from "@material-ui/core";
 import MenuIcon from "@material-ui/icons/Menu";
 import ContactIcon from "@material-ui/icons/AccountCircleRounded";
 import SearchBar from "./Search";
 import RightSIde from "./RightSIde";
+import clsx from "clsx";
 
 function TopNav({ setfullSide, fullSide }) {
   const [email, setemail] = useState("");
@@ -23,14 +24,21 @@ function TopNav({ setfullSide, fullSide }) {
     toolbar: {
       display: "flex",
       alignItems: "center",
-      gap: 80,
+      justifyContent: "center",
+      gap: 50,
     },
     leftSide: {
       display: "flex",
       alignItems: "center",
       gap: 5,
     },
+    hide: {
+      display: "none"
+    }
   }));
+
+  const hide = useMediaQuery('(max-width: 500px)')
+  
 
   useEffect(() => {
     const email = sessionStorage.getItem("email");
@@ -40,7 +48,6 @@ function TopNav({ setfullSide, fullSide }) {
   const classes = useStyles();
 
   return (
-    <div>
       <AppBar position="static" elevation={0} className={classes.appbar}>
         <ToolBar className={classes.toolbar}>
           <div className={classes.leftSide}>
@@ -51,7 +58,7 @@ function TopNav({ setfullSide, fullSide }) {
             >
               <MenuIcon />
             </IconButton>
-            <ContactIcon fontSize="large" className={classes.account} />
+            <ContactIcon className={clsx({[classes.account]: true, [classes.hide]: hide})} />
             <Typography variant="h5" component="h1">
               Contacts
             </Typography>
@@ -60,7 +67,7 @@ function TopNav({ setfullSide, fullSide }) {
           <RightSIde email={email} />
         </ToolBar>
       </AppBar>
-    </div>
+    
   );
 }
 

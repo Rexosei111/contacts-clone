@@ -70,6 +70,7 @@ function NewContact(props) {
 
   const [image, setimage] = useState(null);
   const [imageURL, setimageURL] = useState()
+  
 
   useEffect(() => {
     let formData = new FormData();
@@ -95,13 +96,13 @@ function NewContact(props) {
       url: "http://localhost:8000/api/contacts/create/",
       data: {...contact, "imageURL": imageURL},
       headers: {
-        // "Content-Type": "Application/json",
         Authorization: `Token ${props.token}`,
       },
     })
       .then((response) => {
         handleContacts([...Contacts, response.data]);
         setContact({});
+        history.push(`/contacts/${response.data.id}`)
       })
       .catch((err) => {
         console.log(err);

@@ -13,36 +13,18 @@ import clsx from "clsx";
 import Actions from "./Actions";
 import SelectedHeader from "./SelectedHeader";
 import { useHistory } from "react-router"
+import useMediaQuery from '@material-ui/core/useMediaQuery';
 
-const columns = [
-  { id: "name", label: "Name", minWidth: 170 },
-  { id: "email", label: "Email", minWidth: 100, align: "center" },
-  {
-    id: "number",
-    label: "Phone Number",
-    minWidth: 170,
-    align: "center",
-  },
-  {
-    id: "job",
-    label: "Job/Company",
-    minWidth: 170,
-    align: "center",
-  },
-  {
-    id: "actions",
-    label: "",
-    minWidth: 170,
-    align: "right",
-  },
-];
 
 const useStyles = makeStyles({
   root: {
     width: "100%",
+    height: "100%",
+    // backgroundColor: "#000000"
   },
   container: {
     maxHeight: "100%",
+    overflowX: "hidden"
   },
   tablehead: {
     backgroundColor: "#ffffff",
@@ -75,12 +57,48 @@ const useStyles = makeStyles({
     width: 32,
     height: 32,
   },
+  hide: {
+    display: "none"
+  },
+  
 });
 
 function Content({ Contacts, token }) {
   const [Selected, setSelected] = useState([]);
   const [hoveredEl, setHoveredEl] = useState("");
   const history = useHistory();
+  const matches = useMediaQuery('(max-width:1290px)');
+  const phN = useMediaQuery('(max-width:1050px)');
+  const mail = useMediaQuery('(max-width:700px)')
+  const act = useMediaQuery('(max-width:600px)')
+
+
+  const columns = [
+    { id: "name", label: "Name", minWidth: 170 },
+    { id: "email", label: "Email", minWidth: 100, align: "center", hide: mail },
+    {
+      id: "number",
+      label: "Phone Number",
+      minWidth: 170,
+      align: "center",
+      hide: phN
+    },
+    {
+      id: "job",
+      label: "Job/Company",
+      minWidth: 170,
+      align: "center",
+      hide: matches
+    },
+    {
+      id: "actions",
+      label: "",
+      minWidth: 170,
+      align: "right",
+    },
+    
+  ];
+  
 
   const handleCheck = (e) => {
     const checkId = e.target.value;
@@ -105,8 +123,6 @@ function Content({ Contacts, token }) {
   };
 
   const viewDetail = (e, id) => {
-    // console.log(e.target.tagName.toLowerCase())
-    // if (e.target.tagName.toLowerCase() !== "input" || e.target.tagName !== "svg")
     history.push(`/contacts/${id}`);
   };
 
@@ -130,7 +146,7 @@ function Content({ Contacts, token }) {
                     key={column.id}
                     align={column.align}
                     style={{ minWidth: column.minWidth }}
-                    className={classes.tablehead}
+                    className={clsx({[classes.tablehead]: true, [classes.hide]: column.hide})}
                   >
                     {column.label}
                   </TableCell>
@@ -157,6 +173,7 @@ function Content({ Contacts, token }) {
                       [classes.name]: true,
                       [classes.tablecell]: true,
                     })}
+                    style={{minWidth: `${act ? "600px" : "inherit"}`}}
                   >
                     {hoveredEl === String(contact.id) ||
                     Selected.includes(String(contact.id)) ? (
@@ -179,19 +196,20 @@ function Content({ Contacts, token }) {
                       contact.first_name + " " + contact.last_name
                     }`}</Typography>
                   </TableCell>
-                  <TableCell align="center" className={classes.tablecell}>
+                  <TableCell align="center" className={clsx({[classes.tablecell]: true, [classes.hide]: mail})}>
                     {contact.email}
                   </TableCell>
-                  <TableCell align="center" className={classes.tablecell}>
+                  <TableCell align="center" className={clsx({[classes.tablecell]: true, [classes.hide]: phN})}>
                     {contact.phone}
                   </TableCell>
-                  <TableCell align="center" className={classes.tablecell}>
+                  <TableCell align="center" className={clsx({[classes.tablecell]: true, [classes.hide]: matches})}>
                     {contact.job}
                   </TableCell>
                   <TableCell
                     align="right"
                     className={clsx({
                       [classes.tablecell]: true,
+                      [classes.hide]: act
                     })}
                     padding="none"
                   >
