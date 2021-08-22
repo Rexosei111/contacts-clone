@@ -52,6 +52,7 @@ const useStyles = makeStyles({
     alignItems: "center",
     height: 53,
     gap: 20,
+    
   },
   checkbox: {
     width: 32,
@@ -145,7 +146,7 @@ function Content({ Contacts, token }) {
                   <TableCell
                     key={column.id}
                     align={column.align}
-                    style={{ minWidth: column.minWidth }}
+                    style={{ minWidth: column.minWidth, fontWeight: 600 }}
                     className={clsx({[classes.tablehead]: true, [classes.hide]: column.hide})}
                   >
                     {column.label}
@@ -192,18 +193,18 @@ function Content({ Contacts, token }) {
                         email={contact.first_name}
                       />
                     )}
-                    <Typography component="span" variant="body2">{`${
+                    <Typography component="span" variant="body2" style={{fontFamily: 'Roboto, Helvetica, Arial, sans-serif', fontWeight: 400}}>{`${
                       contact.first_name + " " + contact.last_name
                     }`}</Typography>
                   </TableCell>
                   <TableCell align="center" className={clsx({[classes.tablecell]: true, [classes.hide]: mail})}>
-                    {contact.email}
+                  <Typography component="span" variant="body2" style={{fontFamily: 'Roboto, Helvetica, Arial, sans-serif', fontWeight: 400}}>{contact.email}</Typography>
                   </TableCell>
                   <TableCell align="center" className={clsx({[classes.tablecell]: true, [classes.hide]: phN})}>
-                    {contact.phone}
+                  <Typography component="span" variant="body2" style={{fontFamily: 'Roboto, Helvetica, Arial, sans-serif', fontWeight: 400}}>{contact.phone}</Typography>
                   </TableCell>
                   <TableCell align="center" className={clsx({[classes.tablecell]: true, [classes.hide]: matches})}>
-                    {contact.job}
+                  <Typography component="span" variant="body2" style={{fontFamily: 'Roboto, Helvetica, Arial, sans-serif', fontWeight: 400}}>{contact.jonb}</Typography>
                   </TableCell>
                   <TableCell
                     align="right"

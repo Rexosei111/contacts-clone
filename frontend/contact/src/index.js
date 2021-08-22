@@ -18,6 +18,27 @@ const theme = responsiveFontSizes(
           minWidth: 40,
         },
       },
+      MuiTypography: {
+        style: {
+          fontWeight: 600
+        }
+      }
+    },
+    typography: {
+      fontFamily: [
+        'Open Sans',
+        'sans-serif',
+        'Roboto',
+        '-apple-system',
+        'BlinkMacSystemFont',
+        '"Segoe UI"',
+        '"Helvetica Neue"',
+        'Arial',
+        'sans-serif',
+        '"Apple Color Emoji"',
+        '"Segoe UI Emoji"',
+        '"Segoe UI Symbol"',
+      ].join(','),
     },
   })
 );
