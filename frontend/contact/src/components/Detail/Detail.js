@@ -1,7 +1,14 @@
 import React, { useEffect, useState } from "react";
 import { makeStyles } from "@material-ui/core/styles";
 import { Side } from "../Layout";
-import { Button, IconButton, Paper, Typography } from "@material-ui/core";
+import {
+  Button,
+  Container,
+  IconButton,
+  Paper,
+  Typography,
+  useMediaQuery,
+} from "@material-ui/core";
 import ArrowBackIcon from "@material-ui/icons/ArrowBack";
 import AccountAvartar from "./AccountAvartar";
 import LabelOutlined from "@material-ui/icons/LabelOutlined";
@@ -32,28 +39,29 @@ function Detail(props) {
   const [image, setimage] = useState(null);
   const [imageURL, setimageURL] = useState(null);
 
+  const matches = useMediaQuery("(max-width: 840px)");
+
   const useStyles = makeStyles((theme) => ({
     container: {
       marginLeft: fullSide ? 265 : 0,
       height: "90vh",
-      padding: "10px 20px",
       backgroundColor: "#ffffff",
-      // overflowY: "auto"
+      overflowX: "hidden"
     },
     paper: {
       width: "100%",
-      height: "35%",
-      // borderBottom: "1px solid #e0e0e0",
-      padding: "15px",
+      minHeight: "35%",
+      padding: "5px 10px",
       display: "flex",
+      justifyContent: matches ? "space-between" : "initial",
       gap: 25,
     },
     name: {
       height: "100%",
       display: "flex",
+      flexDirection: matches ? "column" : "row",
       alignItems: "center",
       gap: 25,
-      // backgroundColor: "#22efce"
     },
     info: {
       display: "flex",
@@ -68,9 +76,9 @@ function Detail(props) {
     },
     actions: {
       display: "flex",
-      alignItems: "flex-end",
+      alignItems: matches ? "flex-start" : "flex-end",
       height: "100%",
-      marginLeft: "auto",
+      marginLeft: matches ? null : "auto",
     },
     actionBtn: {
       display: "flex",
@@ -80,6 +88,15 @@ function Detail(props) {
     backBtn: {
       height: theme.spacing(4),
       width: theme.spacing(4),
+    },
+
+    edit: {
+      display: matches ? "none" : null,
+    },
+    mainInfo: {
+      padding: "8px 0px",
+      width: "100%",
+      overflowY: "auto",
     },
   }));
 
@@ -173,8 +190,8 @@ function Detail(props) {
   const classes = useStyles();
 
   return (
-    <main className={classes.container}>
-      <Paper className={classes.paper} elevation={0}>
+    <Paper component="main" className={classes.container}>
+      <Container className={classes.paper} elevation={0}>
         {Edit ? (
           <IconButton className={classes.backBtn} onClick={() => setEdit(0)}>
             <CloseIcon fontSize="small" />
@@ -195,7 +212,7 @@ function Detail(props) {
           </div>
           <div className={classes.info}>
             {contact.first_name && (
-              <Typography variant="h5">{`${
+              <Typography variant="h5" style={{alignSelf: "center"}}>{`${
                 contact?.first_name + " " + contact?.last_name
               }`}</Typography>
             )}
@@ -226,26 +243,28 @@ function Detail(props) {
               ) : (
                 <StarOutline fontSize="small" onClick={handleFavorite} />
               )}
-              <Menu Contacts={Contacts} handleContacts={handleContacts} id={id} token={props.token} />
+              <Menu
+                Contacts={Contacts}
+                handleContacts={handleContacts}
+                id={id}
+                token={props.token}
+              />
               <Button
                 variant="contained"
                 color="primary"
                 disableElevation
                 onClick={handleEdit}
+                className={classes.edit}
               >
                 Edit
               </Button>
             </div>
           )}
         </div>
-      </Paper>
+      </Container>
       <Divider light />
-      <div
-        style={{
-          padding: "8px 60px",
-          width: "100%",
-          overflowY: "auto",
-        }}
+      <Container
+        className={classes.mainInfo}
       >
         {Edit ? (
           <ContactForm
@@ -256,8 +275,8 @@ function Detail(props) {
         ) : (
           <ContactDetails contact={contact} setContact={setContact} />
         )}
-      </div>
-    </main>
+      </Container>
+    </Paper>
   );
 }
 

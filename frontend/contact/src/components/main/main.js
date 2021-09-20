@@ -14,9 +14,7 @@ function Main({ token }) {
   const useStyles = makeStyles((theme) => ({
     container: {
       marginLeft: fullSide ? 265 : 0,
-      overflowX: "hidden",
       height: "90vh",
-      // padding: "5px 10px",
       backgroundColor: "#ffffff",
     },
     fab: {
