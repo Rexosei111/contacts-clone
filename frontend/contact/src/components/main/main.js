@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import { makeStyles } from "@material-ui/core/styles";
 import Content from "./Content";
 import { Side } from "../Layout";
@@ -7,10 +7,12 @@ import axios from "axios";
 import Fab from "@material-ui/core/Fab";
 import AddIcon from "@material-ui/icons/Add";
 import clsx from "clsx";
-import { useMediaQuery } from "@material-ui/core";
+import { Typography, useMediaQuery } from "@material-ui/core";
+import CircularProgress from "@material-ui/core/CircularProgress";
 
 function Main({ token }) {
   const { fullSide, Contacts, handleContacts } = React.useContext(Side);
+  const [Loading, setLoading] = useState(true);
   const matches = useMediaQuery("(max-width: 1024px)");
 
   const useStyles = makeStyles((theme) => ({
@@ -18,6 +20,11 @@ function Main({ token }) {
       marginLeft: matches ? 0 : fullSide ? 265 : 0,
       height: "90vh",
       backgroundColor: "#ffffff",
+    },
+    containerLoading: {
+      display: "flex",
+      alignItems: "center",
+      justifyContent: "center",
     },
     fab: {
       position: "absolute",
@@ -52,9 +59,11 @@ function Main({ token }) {
       })
         .then((response) => {
           handleContacts(response.data);
+          setLoading(false);
         })
         .catch((error) => {
           handleContacts(fallbackContacts);
+          setLoading(false);
         });
     }
   }, [token, handleContacts]);
@@ -64,8 +73,17 @@ function Main({ token }) {
   }
 
   return (
-    <main className={classes.container}>
-      <Content Contacts={Contacts} token={token} />
+    <main
+      className={clsx({
+        [classes.container]: true,
+        [classes.containerLoading]: Loading,
+      })}
+    >
+      {Loading ? (
+        <CircularProgress size="40px" />
+      ) : (
+        <Content Contacts={Contacts} token={token} />
+      )}
       <Fab
         color="primary"
         aria-label="Add New Contact"

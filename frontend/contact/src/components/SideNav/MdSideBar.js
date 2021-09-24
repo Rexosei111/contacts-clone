@@ -100,6 +100,7 @@ function MdSideBar({ fullSide, Contacts, setfullSide }) {
           exact
           to="/"
           className={classes.listitem}
+          onClick={closeSideBar}
         >
           <ListItemIcon>
             <PersonOutlineIcon fontSize="small" />

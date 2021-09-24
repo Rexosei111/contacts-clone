@@ -28,7 +28,7 @@ function NewContact(props) {
     },
     paper: {
       width: "100%",
-      padding: "5px 0px",
+      padding: "20px 5px",
       display: "flex",
       justifyContent: matches ? "space-between" : "initial",
       gap: matches ? 15 : 25,
@@ -83,17 +83,19 @@ function NewContact(props) {
   useEffect(() => {
     let formData = new FormData();
     formData.append("image", image);
-    axios({
-      method: "post",
-      url: "http://localhost:8000/api/contacts/images/upload/",
-      data: formData,
-      headers: {
-        "Content-Type": "multipart/form-data",
-        Authorization: `Token ${props.token}`,
-      },
-    })
-      .then((response) => setimageURL(response.data.image))
-      .catch((err) => console.log(err));
+    if (image !== null) {
+      axios({
+        method: "post",
+        url: "http://localhost:8000/api/contacts/images/upload/",
+        data: formData,
+        headers: {
+          "Content-Type": "multipart/form-data",
+          Authorization: `Token ${props.token}`,
+        },
+      })
+        .then((response) => setimageURL(response.data.image))
+        .catch((err) => console.log(err));
+    }
   }, [props.token, image]);
 
   const handleSubmit = (e) => {
