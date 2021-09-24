@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { Button } from "@material-ui/core";
+import { Button, IconButton, Typography } from "@material-ui/core";
 import List from "@material-ui/core/List";
 import ListItem from "@material-ui/core/ListItem";
 import ListItemIcon from "@material-ui/core/ListItemIcon";
@@ -24,8 +24,9 @@ import AddIcon from "@material-ui/icons/Add";
 import PersonOutlineIcon from "@material-ui/icons/PersonOutline";
 import { NavLink } from "react-router-dom";
 import { useHistory } from "react-router";
+import ArrowBackIcon from "@material-ui/icons/ArrowBack";
 
-function SideBar({ fullSide, Contacts, setfullSide }) {
+function MdSideBar({ fullSide, Contacts, setfullSide }) {
   const history = useHistory();
 
   const [label, setlabel] = useState(true);
@@ -36,16 +37,21 @@ function SideBar({ fullSide, Contacts, setfullSide }) {
       paddingRight: 10,
       height: "100vh",
       position: "fixed",
-      left: fullSide ? 0 : -280,
+      top: 0,
+      left: fullSide ? 0 : -300,
       zIndex: 20,
     },
-    create: {
+    appName: {
       height: 50,
+      width: "100%",
+      display: "flex",
+      alignItems: "center",
+      boxSizing: "border-box",
+      padding: 5,
+      justifyContent: "center",
       borderRadius: 40,
       backgroundColor: "#ffffff",
       color: "#5f6368",
-      margin: "20px 5px",
-      padding: "0 25px",
     },
     listitem: {
       borderRadius: "0 30px 30px 0",
@@ -61,27 +67,32 @@ function SideBar({ fullSide, Contacts, setfullSide }) {
     actionIcons: {
       color: "#5f6368",
     },
+    backBtn: {
+      height: theme.spacing(4),
+      width: theme.spacing(4),
+      position: "absolute",
+      right: 5,
+    },
   }));
   const classes = useStyle();
 
-  const handleCreate = () => {
-    history.push("/new");
+  const closeSideBar = () => {
+    setfullSide(false);
   };
 
   const handleLabel = () => {
     setlabel(!label);
   };
   return (
-    <Paper className={classes.paper} component="aside" elevation={0}>
-      <Button
-        variant="contained"
-        startIcon={<AddIcon />}
-        className={classes.create}
-        elevation={0}
-        onClick={handleCreate}
-      >
-        Create Contact
-      </Button>
+    <Paper className={classes.paper} component="aside" elevation={10}>
+      <div className={classes.appName}>
+        <Typography component="h1" variant="h6">
+          Google Contacts
+        </Typography>
+        <IconButton className={classes.backBtn} onClick={closeSideBar}>
+          <ArrowBackIcon fontSize="small" />
+        </IconButton>
+      </div>
       <List dense={true} className={classes.list}>
         <ListItem
           button
@@ -208,4 +219,4 @@ function SideBar({ fullSide, Contacts, setfullSide }) {
     </Paper>
   );
 }
-export default SideBar;
+export default MdSideBar;

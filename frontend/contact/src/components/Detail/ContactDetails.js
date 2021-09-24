@@ -31,7 +31,7 @@ const icons = {
 
 function ContactDetails({ contact }) {
   const classes = useStyles();
-  
+
   return (
     <Paper className={classes.paper} elevation={0}>
       <Typography variant="h6" className={classes.head}>

@@ -43,10 +43,11 @@ function Detail(props) {
   const [imageURL, setimageURL] = useState(null);
 
   const matches = useMediaQuery("(max-width: 840px)");
+  const hide = useMediaQuery("(max-width: 1024px)");
 
   const useStyles = makeStyles((theme) => ({
     container: {
-      marginLeft: fullSide ? 265 : 0,
+      marginLeft: hide ? 0 : fullSide ? 265 : 0,
       height: "90vh",
       backgroundColor: "ffffff",
       padding: "0px 10px",
@@ -54,7 +55,7 @@ function Detail(props) {
     },
     paper: {
       width: "100%",
-      padding: "5px 0px",
+      padding: "20px 5px",
       display: "flex",
       justifyContent: matches ? "space-between" : "initial",
       gap: matches ? 15 : 25,
@@ -69,7 +70,7 @@ function Detail(props) {
     info: {
       display: "flex",
       flexDirection: "column",
-      alignItems: "flex-start",
+      alignItems: matches ? "center" : "flex-start",
       gap: matches ? 5 : 10,
     },
     label: {

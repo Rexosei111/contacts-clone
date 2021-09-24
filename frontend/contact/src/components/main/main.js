@@ -11,9 +11,11 @@ import { useMediaQuery } from "@material-ui/core";
 
 function Main({ token }) {
   const { fullSide, Contacts, handleContacts } = React.useContext(Side);
+  const matches = useMediaQuery("(max-width: 1024px)");
+
   const useStyles = makeStyles((theme) => ({
     container: {
-      marginLeft: fullSide ? 265 : 0,
+      marginLeft: matches ? 0 : fullSide ? 265 : 0,
       height: "90vh",
       backgroundColor: "#ffffff",
     },
