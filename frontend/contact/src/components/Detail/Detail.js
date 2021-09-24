@@ -20,8 +20,11 @@ import { useHistory, useLocation, useParams } from "react-router-dom";
 import axios from "axios";
 import ContactDetails from "./ContactDetails";
 import CloseIcon from "@material-ui/icons/Close";
+import EditOutlined from "@material-ui/icons/EditOutlined";
 import ImageUploadBtn from "./ImageUploadBtn";
 import ContactForm from "./ContactForm";
+import Fab from "@material-ui/core/Fab";
+import clsx from "clsx";
 
 function Detail(props) {
   const query = new URLSearchParams(useLocation().search);
@@ -45,29 +48,29 @@ function Detail(props) {
     container: {
       marginLeft: fullSide ? 265 : 0,
       height: "90vh",
-      backgroundColor: "#ffffff",
-      overflowX: "hidden"
+      backgroundColor: "ffffff",
+      padding: "0px 10px",
+      overflowY: "auto",
     },
     paper: {
       width: "100%",
-      minHeight: "35%",
-      padding: "5px 10px",
+      padding: "5px 0px",
       display: "flex",
       justifyContent: matches ? "space-between" : "initial",
-      gap: 25,
+      gap: matches ? 15 : 25,
     },
     name: {
       height: "100%",
       display: "flex",
       flexDirection: matches ? "column" : "row",
       alignItems: "center",
-      gap: 25,
+      gap: matches ? 10 : 25,
     },
     info: {
       display: "flex",
       flexDirection: "column",
       alignItems: "flex-start",
-      gap: 10,
+      gap: matches ? 5 : 10,
     },
     label: {
       height: 35,
@@ -94,9 +97,20 @@ function Detail(props) {
       display: matches ? "none" : null,
     },
     mainInfo: {
-      padding: "8px 0px",
+      padding: "8px 5px",
       width: "100%",
       overflowY: "auto",
+    },
+    fab: {
+      position: "fixed",
+      visibility: "hidden",
+      width: theme.spacing(6),
+      height: theme.spacing(6),
+      bottom: 10,
+      right: 10,
+    },
+    show: {
+      visibility: "visible",
     },
   }));
 
@@ -190,8 +204,8 @@ function Detail(props) {
   const classes = useStyles();
 
   return (
-    <Paper component="main" className={classes.container}>
-      <Container className={classes.paper} elevation={0}>
+    <Paper component="main" className={classes.container} elevation={0}>
+      <Container className={classes.paper}>
         {Edit ? (
           <IconButton className={classes.backBtn} onClick={() => setEdit(0)}>
             <CloseIcon fontSize="small" />
@@ -212,7 +226,7 @@ function Detail(props) {
           </div>
           <div className={classes.info}>
             {contact.first_name && (
-              <Typography variant="h5" style={{alignSelf: "center"}}>{`${
+              <Typography variant="h5" style={{ alignSelf: "center" }}>{`${
                 contact?.first_name + " " + contact?.last_name
               }`}</Typography>
             )}
@@ -263,9 +277,7 @@ function Detail(props) {
         </div>
       </Container>
       <Divider light />
-      <Container
-        className={classes.mainInfo}
-      >
+      <Container className={classes.mainInfo}>
         {Edit ? (
           <ContactForm
             contact={contact}
@@ -276,6 +288,16 @@ function Detail(props) {
           <ContactDetails contact={contact} setContact={setContact} />
         )}
       </Container>
+      {Edit ? null : (
+        <Fab
+          color="primary"
+          aria-label="Add New Contact"
+          onClick={handleEdit}
+          className={clsx({ [classes.fab]: true, [classes.show]: matches })}
+        >
+          <EditOutlined fontSize="small" />
+        </Fab>
+      )}
     </Paper>
   );
 }

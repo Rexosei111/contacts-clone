@@ -14,7 +14,7 @@ import MailOutlineIcon from "@material-ui/icons/MailOutline";
 
 const useStyles = makeStyles((theme) => ({
   paper: {
-    padding: "5px",
+    padding: "5px 0px",
     maxWidth: "570px",
     display: "flex",
     flexDirection: "column",
@@ -28,7 +28,6 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-
 function ContactForm(props) {
   const clasess = useStyles();
 
@@ -37,12 +36,9 @@ function ContactForm(props) {
     props.setContact((prevState) => ({
       ...prevState,
       [name]: value,
-    })
-    );
+    }));
   };
 
-  
-  
   return (
     <Paper className={clasess.paper} elevation={0}>
       <form method="post">
@@ -53,7 +49,7 @@ function ContactForm(props) {
           justifyContent="flex-start"
           alignItems="center"
         >
-          <Grid item container spacing={2} alignItems="flex-end">
+          <Grid item container spacing={2} alignItems="flex-end" wrap="nowrap">
             <Grid item>
               <AccountCircleRounded />
             </Grid>
@@ -76,7 +72,7 @@ function ContactForm(props) {
               </IconButton>
             </Grid>
           </Grid>
-          <Grid item container spacing={2} alignItems="flex-end">
+          <Grid item container spacing={2} alignItems="flex-end" wrap="nowrap">
             <Grid item>
               <AccountCircleRounded style={{ opacity: "0%" }} />
             </Grid>
@@ -103,7 +99,7 @@ function ContactForm(props) {
             </Grid>
           </Grid>
 
-          <Grid item container spacing={2} alignItems="flex-end">
+          <Grid item container spacing={2} alignItems="flex-end" wrap="nowrap">
             <Grid item>
               <BusinessIcon />
             </Grid>
@@ -125,7 +121,7 @@ function ContactForm(props) {
               </IconButton>
             </Grid>
           </Grid>
-          <Grid item container spacing={2} alignItems="flex-end">
+          <Grid item container spacing={2} alignItems="flex-end" wrap="nowrap">
             <Grid item>
               <AccountCircleRounded style={{ opacity: "0%" }} />
             </Grid>
@@ -152,7 +148,7 @@ function ContactForm(props) {
             </Grid>
           </Grid>
 
-          <Grid item container spacing={2} alignItems="flex-end">
+          <Grid item container spacing={2} alignItems="flex-end" wrap="nowrap">
             <Grid item>
               <MailOutlineIcon />
             </Grid>
@@ -176,7 +172,7 @@ function ContactForm(props) {
             </Grid>
           </Grid>
 
-          <Grid item container spacing={2} alignItems="flex-end">
+          <Grid item container spacing={2} alignItems="flex-end" wrap="nowrap">
             <Grid item>
               <PhoneOutlinedIcon />
             </Grid>

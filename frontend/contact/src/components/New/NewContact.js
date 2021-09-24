@@ -1,46 +1,55 @@
 import React, { useEffect, useState } from "react";
-import { makeStyles } from "@material-ui/core";
+import { Container, makeStyles } from "@material-ui/core";
 import { Side } from "../Layout";
-import { Button, IconButton, Paper} from "@material-ui/core";
+import { Button, IconButton, Paper } from "@material-ui/core";
 import ArrowBackIcon from "@material-ui/icons/ArrowBack";
 import AccountAvartar from "../Detail/AccountAvartar";
 import LabelOutlined from "@material-ui/icons/LabelOutlined";
 import { Divider } from "@material-ui/core";
-import { useHistory} from "react-router-dom";
+import { useHistory } from "react-router-dom";
 import axios from "axios";
 import ImageUploadBtn from "../Detail/ImageUploadBtn";
 import ContactForm from "../Detail/ContactForm";
+import { useMediaQuery } from "@material-ui/core";
 
 function NewContact(props) {
   const { fullSide, Contacts, handleContacts } = React.useContext(Side);
   const [contact, setContact] = useState({});
   const history = useHistory();
+  const matches = useMediaQuery("(max-width: 840px)");
 
   const useStyles = makeStyles((theme) => ({
     container: {
       marginLeft: fullSide ? 265 : 0,
       height: "90vh",
-      padding: "10px 20px",
       backgroundColor: "#ffffff",
+      padding: "0px 10px",
+      overflowY: "auto",
     },
     paper: {
       width: "100%",
-      height: "35%",
-      padding: "15px",
+      padding: "5px 0px",
       display: "flex",
-      gap: 25,
+      justifyContent: matches ? "space-between" : "initial",
+      gap: matches ? 15 : 25,
     },
     name: {
       height: "100%",
       display: "flex",
+      flexDirection: matches ? "column" : "row",
       alignItems: "center",
-      gap: 25,
+      gap: matches ? 10 : 25,
     },
     info: {
       display: "flex",
       flexDirection: "column",
       alignItems: "flex-start",
-      gap: 10,
+      gap: matches ? 5 : 10,
+    },
+    mainInfo: {
+      padding: "8px 5px",
+      width: "100%",
+      overflowY: "auto",
     },
     label: {
       height: 35,
@@ -49,9 +58,9 @@ function NewContact(props) {
     },
     actions: {
       display: "flex",
-      alignItems: "flex-end",
+      alignItems: matches ? "flex-start" : "flex-end",
       height: "100%",
-      marginLeft: "auto",
+      marginLeft: matches ? null : "auto",
     },
     actionBtn: {
       display: "flex",
@@ -69,8 +78,7 @@ function NewContact(props) {
   };
 
   const [image, setimage] = useState(null);
-  const [imageURL, setimageURL] = useState()
-  
+  const [imageURL, setimageURL] = useState();
 
   useEffect(() => {
     let formData = new FormData();
@@ -84,17 +92,15 @@ function NewContact(props) {
         Authorization: `Token ${props.token}`,
       },
     })
-    .then(response => setimageURL(response.data.image))
-    .catch(err => console.log(err))
-    
-  }, [props.token,image]);
+      .then((response) => setimageURL(response.data.image))
+      .catch((err) => console.log(err));
+  }, [props.token, image]);
 
   const handleSubmit = (e) => {
-
     axios({
       method: "post",
       url: "http://localhost:8000/api/contacts/create/",
-      data: {...contact, "imageURL": imageURL},
+      data: { ...contact, imageURL: imageURL },
       headers: {
         Authorization: `Token ${props.token}`,
       },
@@ -102,7 +108,7 @@ function NewContact(props) {
       .then((response) => {
         handleContacts([...Contacts, response.data]);
         setContact({});
-        history.push(`/contacts/${response.data.id}`)
+        history.push(`/contacts/${response.data.id}`);
       })
       .catch((err) => {
         console.log(err);
@@ -119,11 +125,7 @@ function NewContact(props) {
         </IconButton>
         <div className={classes.name}>
           <div style={{ position: "relative" }}>
-            <AccountAvartar
-              size="xxlarge"
-              link={imageURL}
-              //   email={contact.first_name}
-            />
+            <AccountAvartar size="xxlarge" link={imageURL} />
             <ImageUploadBtn setimage={setimage} />
           </div>
           <div className={classes.info}>
@@ -144,16 +146,9 @@ function NewContact(props) {
         </div>
       </Paper>
       <Divider light />
-      <div
-        style={{
-          padding: "8px 60px",
-          // height: "57vh",
-          width: "100%",
-          overflowY: "auto",
-        }}
-      >
+      <Container className={classes.mainInfo}>
         <ContactForm contact={contact} setContact={setContact} image={image} />
-      </div>
+      </Container>
     </main>
   );
 }
