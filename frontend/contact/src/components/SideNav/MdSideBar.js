@@ -115,13 +115,20 @@ function MdSideBar({ fullSide, Contacts, setfullSide }) {
           component={NavLink}
           to="/frequent"
           className={classes.listitem}
+          onClick={closeSideBar}
         >
           <ListItemIcon>
             <HistoryIcon fontSize="small" />
           </ListItemIcon>
           <ListItemText>Frequently Contacted</ListItemText>
         </ListItem>
-        <ListItem button component="a" href="#" className={classes.listitem}>
+        <ListItem
+          button
+          component={NavLink}
+          to="/suggestions"
+          className={classes.listitem}
+          onClick={closeSideBar}
+        >
           <ListItemIcon>
             <AssistantOutlinedIcon fontSize="small" />
           </ListItemIcon>
@@ -153,6 +160,7 @@ function MdSideBar({ fullSide, Contacts, setfullSide }) {
               component="a"
               href="#"
               className={classes.listitem}
+              onClick={closeSideBar}
             >
               <ListItemIcon>
                 <LabelOutlinedIcon fontSize="small" />
@@ -172,6 +180,7 @@ function MdSideBar({ fullSide, Contacts, setfullSide }) {
               component="a"
               href="#"
               className={classes.listitem}
+              onClick={closeSideBar}
             >
               <ListItemIcon>
                 <AddIcon fontSize="small" />
@@ -183,19 +192,37 @@ function MdSideBar({ fullSide, Contacts, setfullSide }) {
       </List>
       <Divider />
       <List dense={true} className={classes.list}>
-        <ListItem button component="a" href="#" className={classes.listitem}>
+        <ListItem
+          button
+          component="a"
+          href="#"
+          className={classes.listitem}
+          onClick={closeSideBar}
+        >
           <ListItemIcon>
             <PublishOutlinedIcon fontSize="small" />
           </ListItemIcon>
           <ListItemText>Import</ListItemText>
         </ListItem>
-        <ListItem button component="a" href="#" className={classes.listitem}>
+        <ListItem
+          button
+          component="a"
+          href="#"
+          className={classes.listitem}
+          onClick={closeSideBar}
+        >
           <ListItemIcon>
             <BackupOutlinedIcon fontSize="small" />
           </ListItemIcon>
           <ListItemText>Export</ListItemText>
         </ListItem>
-        <ListItem button component="a" href="#" className={classes.listitem}>
+        <ListItem
+          button
+          component="a"
+          href="#"
+          className={classes.listitem}
+          onClick={closeSideBar}
+        >
           <ListItemIcon>
             <PrintOutlinedIcon fontSize="small" />
           </ListItemIcon>
@@ -204,13 +231,25 @@ function MdSideBar({ fullSide, Contacts, setfullSide }) {
       </List>
       <Divider orientation="horizontal" />
       <List dense={true} className={classes.list}>
-        <ListItem button component="a" href="#" className={classes.listitem}>
+        <ListItem
+          button
+          component="a"
+          href="#"
+          className={classes.listitem}
+          onClick={closeSideBar}
+        >
           <ListItemIcon>
             <AssignmentReturnedOutlinedIcon fontSize="small" />
           </ListItemIcon>
           <ListItemText>Other Contacts</ListItemText>
         </ListItem>
-        <ListItem button component="a" href="#" className={classes.listitem}>
+        <ListItem
+          button
+          component="a"
+          href="#"
+          className={classes.listitem}
+          onClick={closeSideBar}
+        >
           <ListItemIcon>
             <DeleteOutlineOutlinedIcon fontSize="small" />
           </ListItemIcon>

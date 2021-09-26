@@ -79,6 +79,10 @@ function SideBar({ fullSide, Contacts, setfullSide }) {
         className={classes.create}
         elevation={0}
         onClick={handleCreate}
+        style={{
+          fontFamily: "Roboto, Helvetica, Arial, sans-serif",
+          textAlign: "center",
+        }}
       >
         Create Contact
       </Button>
@@ -109,7 +113,12 @@ function SideBar({ fullSide, Contacts, setfullSide }) {
           </ListItemIcon>
           <ListItemText>Frequently Contacted</ListItemText>
         </ListItem>
-        <ListItem button component="a" href="#" className={classes.listitem}>
+        <ListItem
+          button
+          component={NavLink}
+          to="/suggestions"
+          className={classes.listitem}
+        >
           <ListItemIcon>
             <AssistantOutlinedIcon fontSize="small" />
           </ListItemIcon>

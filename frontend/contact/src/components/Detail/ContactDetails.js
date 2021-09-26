@@ -40,7 +40,8 @@ function ContactDetails({ contact }) {
       <List disablePadding>
         {Object.entries(contact).map(
           ([key, value]) =>
-            (value !== null || value !== "") &&
+            value !== null &&
+            value !== "" &&
             icons[key] && (
               <ListItem key={key} disableGutters>
                 <ListItemIcon>{icons[key]}</ListItemIcon>

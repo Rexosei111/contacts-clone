@@ -229,7 +229,7 @@ function Detail(props) {
           </div>
           <div className={classes.info}>
             {contact.first_name && (
-              <Typography variant="h5" style={{ alignSelf: "center" }}>{`${
+              <Typography variant="h5" style={{ textAlign: "center" }}>{`${
                 contact?.first_name + " " + contact?.last_name
               }`}</Typography>
             )}
