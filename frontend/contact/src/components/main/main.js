@@ -28,9 +28,6 @@ function Main({ token }) {
       backgroundColor: "#ffffff",
     },
     containerLoading: {
-      marginLeft: matches ? 0 : fullSide ? 265 : 0,
-      height: "90vh",
-      backgroundColor: "#ffffff",
       display: "flex",
       alignItems: "center",
       justifyContent: "center",
@@ -94,8 +91,8 @@ function Main({ token }) {
   return (
     <main
       className={clsx({
-        [classes.container]: Contacts.length !== 0,
-        [classes.containerLoading]: !(Contacts.length !== 0),
+        [classes.container]: true,
+        [classes.containerLoading]: Contacts.length === 0,
       })}
     >
       {Loading ? (

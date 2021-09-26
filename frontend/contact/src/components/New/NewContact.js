@@ -82,18 +82,18 @@ function NewContact(props) {
 
   useEffect(() => {
     let formData = new FormData();
-    formData.append("image", image);
+    formData.append("file", image);
     if (image !== null) {
       axios({
         method: "post",
-        url: "http://localhost:8000/api/contacts/images/upload/",
+        url: "https://liel2c.deta.dev/upload/",
         data: formData,
         headers: {
           "Content-Type": "multipart/form-data",
           Authorization: `Token ${props.token}`,
         },
       })
-        .then((response) => setimageURL(response.data.image))
+        .then((response) => setimageURL(response.data.link))
         .catch((err) => console.log(err));
     }
   }, [props.token, image]);
