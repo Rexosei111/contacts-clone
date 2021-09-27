@@ -30,7 +30,7 @@ const fallbackColors = (alphabets) => {
 
 export const Side = React.createContext();
 
-function Layout({ children }) {
+function Layout({ children, setToken }) {
   const { pathname } = useLocation();
   const isAuth = pathname === "/login" || pathname === "/register";
   const [fullSide, setfullSide] = useState(true);
@@ -59,7 +59,11 @@ function Layout({ children }) {
       <div>
         {!isAuth && (
           <>
-            <TopNav setfullSide={setfullSide} fullSide={fullSide} />
+            <TopNav
+              setfullSide={setfullSide}
+              fullSide={fullSide}
+              setToken={setToken}
+            />
             {matches ? (
               <MdSideBar
                 fullSide={fullSide}

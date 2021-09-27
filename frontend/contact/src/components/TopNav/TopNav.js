@@ -13,7 +13,7 @@ import SearchBar from "./Search";
 import RightSIde from "./RightSIde";
 import clsx from "clsx";
 
-function TopNav({ setfullSide, fullSide }) {
+function TopNav({ setfullSide, fullSide, setToken }) {
   const [email, setemail] = useState("");
 
   const useStyles = makeStyles((theme) => ({
@@ -70,7 +70,7 @@ function TopNav({ setfullSide, fullSide }) {
           </Typography>
         </div>
         <SearchBar />
-        <RightSIde email={email} />
+        <RightSIde email={email} setToken={setToken} />
       </ToolBar>
     </AppBar>
   );

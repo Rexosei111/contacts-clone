@@ -14,7 +14,7 @@ function App() {
   const { token, setToken } = useToken();
 
   return (
-    <Layout>
+    <Layout setToken={setToken}>
       <CssBaseline />
       <Switch>
         <Route path="/" render={() => <Main token={token} />} exact />
