@@ -1,6 +1,6 @@
 import React from "react";
 import { CssBaseline } from "@material-ui/core";
-import Main from "./components/Main/Main";
+import Main from "./components/main/Main";
 import { Route, Switch } from "react-router-dom";
 import Layout from "./components/Layout";
 import Login from "./components/Login/Login";
