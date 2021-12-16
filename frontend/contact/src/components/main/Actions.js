@@ -5,7 +5,7 @@ import EditOutlinedIcon from "@material-ui/icons/EditOutlined";
 import { makeStyles } from "@material-ui/core/styles";
 import axios from "axios";
 import { Side } from "../Layout";
-import Menu from '../Menu'
+import Menu from "../Menu";
 import { useHistory } from "react-router";
 
 const useStyles = makeStyles({
@@ -35,14 +35,14 @@ function Actions({ fav, Contacts, token, id }) {
 
   const handleFavorite = (e) => {
     e.preventDefault();
-    e.stopPropagation()
+    e.stopPropagation();
     setIsFav(!isFav);
 
     Contacts.forEach((contact) => {
       if (contact.id === id) {
         axios({
           method: "PATCH",
-          url: `http://localhost:8000/api/contacts/${id}/fav/`,
+          url: `http://rexo.pythonanywhere.com/api/contacts/${id}/fav/`,
           data: contact,
           headers: {
             "content-type": "application/json",
@@ -57,7 +57,7 @@ function Actions({ fav, Contacts, token, id }) {
   //   e.preventDefault();
   //   axios({
   //     method: "DELETE",
-  //     url: `http://localhost:8000/api/contacts/${id}/delete/`,
+  //     url: `http://rexo.pythonanywhere.com/api/contacts/${id}/delete/`,
   //     headers: {
   //       "content-type": "application/json",
   //       Authorization: `Token ${token}`,
@@ -69,7 +69,7 @@ function Actions({ fav, Contacts, token, id }) {
   //     .catch((error) => console.log(error));
   // };
 
-  const history = useHistory()
+  const history = useHistory();
 
   const classes = useStyles();
   return (
@@ -80,9 +80,12 @@ function Actions({ fav, Contacts, token, id }) {
         <StarOutlineIcon fontSize="small" onClick={handleFavorite} />
       )}
 
-      <EditOutlinedIcon fontSize="small" onClick={() => history.push("/contacts/"+ id + "?edit=1")} />
+      <EditOutlinedIcon
+        fontSize="small"
+        onClick={() => history.push("/contacts/" + id + "?edit=1")}
+      />
       {/* <DeleteOutlinedIcon fontSize="small" onClick={handleDelete} /> */}
-      <Menu id={id} handleContacts={handleContacts} token={token}/>
+      <Menu id={id} handleContacts={handleContacts} token={token} />
     </span>
   );
 }

@@ -122,7 +122,7 @@ function Detail(props) {
   useEffect(() => {
     axios({
       method: "get",
-      url: `http://localhost:8000/api/contacts/${id}/`,
+      url: `http://rexo.pythonanywhere.com/api/contacts/${id}/`,
       headers: {
         "Content-type": "application/json",
         Authorization: `Token ${props.token}`,
@@ -138,7 +138,7 @@ function Detail(props) {
     if (image !== null) {
       axios({
         method: "post",
-        url: "http://localhost:8000/api/contacts/images/upload/",
+        url: "http://rexo.pythonanywhere.com/api/contacts/images/upload/",
         data: formData,
         headers: {
           "Content-Type": "multipart/form-data",
@@ -158,7 +158,7 @@ function Detail(props) {
     setIsFav(!Isfav);
     axios({
       method: "PATCH",
-      url: `http://localhost:8000/api/contacts/${id}/fav/`,
+      url: `http://rexo.pythonanywhere.com/api/contacts/${id}/fav/`,
       headers: {
         "Content-type": "application/json",
         Authorization: `Token ${props.token}`,
@@ -184,7 +184,7 @@ function Detail(props) {
   const handleSubmit = (e) => {
     axios({
       method: "PATCH",
-      url: `http://localhost:8000/api/contacts/${contact.id}/update/`,
+      url: `http://rexo.pythonanywhere.com/api/contacts/${contact.id}/update/`,
       data: { ...contact, imageURL: imageURL || contact.imageURL },
       headers: {
         "Content-Type": "Application/json",

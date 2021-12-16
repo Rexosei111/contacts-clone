@@ -57,7 +57,7 @@ const validate = (values) => {
 
 function RegistrationForm({ setToken }) {
   const [ViewPassword, setViewPassword] = useState(false);
-  const history = useHistory()
+  const history = useHistory();
 
   const useStyle = makeStyles((theme) => ({
     form: {
@@ -97,11 +97,11 @@ function RegistrationForm({ setToken }) {
         username: values.username,
         email: values.Email,
         password: values.Password,
-        password2: values.password2
+        password2: values.password2,
       };
       axios({
         method: "POST",
-        url: "http://localhost:8000/api/register/",
+        url: "http://rexo.pythonanywhere.com/api/register/",
         data: form,
       })
         .then((response) => history.push("/login"))
@@ -138,7 +138,7 @@ function RegistrationForm({ setToken }) {
             InputProps={{
               startAdornment: (
                 <InputAdornment position="start">
-                  <AccountCircleRounded color="action"/>
+                  <AccountCircleRounded color="action" />
                 </InputAdornment>
               ),
               endAdornment:
@@ -169,7 +169,7 @@ function RegistrationForm({ setToken }) {
             InputProps={{
               startAdornment: (
                 <InputAdornment position="start">
-                  <MailOutlineIcon color="action"/>
+                  <MailOutlineIcon color="action" />
                 </InputAdornment>
               ),
               endAdornment:
@@ -202,7 +202,7 @@ function RegistrationForm({ setToken }) {
             InputProps={{
               startAdornment: (
                 <InputAdornment position="start">
-                  <LockOpenIcon color="action"/>
+                  <LockOpenIcon color="action" />
                 </InputAdornment>
               ),
               endAdornment:
@@ -214,9 +214,9 @@ function RegistrationForm({ setToken }) {
                   <InputAdornment position="end">
                     <IconButton onClick={() => setViewPassword(!ViewPassword)}>
                       {ViewPassword ? (
-                        <VisibilityOffIcon color="action"/>
+                        <VisibilityOffIcon color="action" />
                       ) : (
-                        <VisibilityIcon color="action"/>
+                        <VisibilityIcon color="action" />
                       )}
                     </IconButton>
                   </InputAdornment>
@@ -234,7 +234,9 @@ function RegistrationForm({ setToken }) {
             label="confirm password"
             name="password2"
             type={ViewPassword ? "text" : "password"}
-            helperText={formik.touched.password2 ? formik.errors.password2 : null}
+            helperText={
+              formik.touched.password2 ? formik.errors.password2 : null
+            }
             value={formik.values.password2}
             onChange={formik.handleChange}
             onBlur={formik.handleBlur}
@@ -244,7 +246,7 @@ function RegistrationForm({ setToken }) {
             InputProps={{
               startAdornment: (
                 <InputAdornment position="start">
-                  <LockOpenIcon color="action"/>
+                  <LockOpenIcon color="action" />
                 </InputAdornment>
               ),
               endAdornment:
@@ -256,9 +258,9 @@ function RegistrationForm({ setToken }) {
                   <InputAdornment position="end">
                     <IconButton onClick={() => setViewPassword(!ViewPassword)}>
                       {ViewPassword ? (
-                        <VisibilityOffIcon color="action"/>
+                        <VisibilityOffIcon color="action" />
                       ) : (
-                        <VisibilityIcon color="action"/>
+                        <VisibilityIcon color="action" />
                       )}
                     </IconButton>
                   </InputAdornment>

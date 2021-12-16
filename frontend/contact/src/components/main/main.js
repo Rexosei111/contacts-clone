@@ -67,7 +67,7 @@ function Main({ token }) {
     if (token) {
       axios({
         method: "get",
-        url: "http://localhost:8000/api/contacts/",
+        url: "http://rexo.pythonanywhere.com/api/contacts/",
         headers: {
           "Content-type": "application/json",
           Authorization: `Token ${token}`,
@@ -220,7 +220,7 @@ const fallbackContacts = [
     first_name: "Oduro",
     last_name: "Twumasi Barnes",
     email: "barnes111@gmail.com",
-    image: "http://localhost:8000/media/contact-images/api.png",
+    image: "http://rexo.pythonanywhere.com/media/contact-images/api.png",
     date_of_birth: "2021-08-11",
     job: "software Engineer",
     phoneNumber: [],
@@ -233,7 +233,7 @@ const fallbackContacts = [
     last_name: "Osei",
     email: "kyeisamuel931@gmail.com",
     image:
-      "http://localhost:8000/media/contact-images/beb9f0204880669056dffd3d24074959.jpg",
+      "http://rexo.pythonanywhere.com/media/contact-images/beb9f0204880669056dffd3d24074959.jpg",
     date_of_birth: null,
     job: null,
     phoneNumber: [

@@ -11,7 +11,7 @@ import axios from "axios";
 import BackupOutlinedIcon from "@material-ui/icons/BackupOutlined";
 import PrintOutlined from "@material-ui/icons/PrintOutlined";
 
-function MoreMenu({id, Contacts, handleContacts, token}) {
+function MoreMenu({ id, Contacts, handleContacts, token }) {
   const [anchorEl, setanchorEl] = useState(null);
 
   const handleClick = (e) => {
@@ -20,21 +20,20 @@ function MoreMenu({id, Contacts, handleContacts, token}) {
   };
 
   const handleDelete = (e) => {
-    
-      handleClose(e)
-      axios({
-        method: "DELETE",
-        url: `http://localhost:8000/api/contacts/${id}/delete/`,
-        headers: {
-          "content-type": "application/json",
-          Authorization: `Token ${token}`,
-        },
+    handleClose(e);
+    axios({
+      method: "DELETE",
+      url: `http://rexo.pythonanywhere.com/api/contacts/${id}/delete/`,
+      headers: {
+        "content-type": "application/json",
+        Authorization: `Token ${token}`,
+      },
+    })
+      .then((response) => {
+        handleContacts(Contacts.filter((contact) => contact.id !== id));
       })
-        .then((response) => {
-          handleContacts(Contacts.filter((contact) => contact.id !== id));
-        })
-        .catch((error) => console.log(error));
-    };
+      .catch((error) => console.log(error));
+  };
 
   const handleClose = (e) => {
     setanchorEl(null);
