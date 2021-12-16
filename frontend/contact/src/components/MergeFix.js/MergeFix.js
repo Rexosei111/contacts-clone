@@ -1,13 +1,10 @@
-import React, { useState } from "react";
+import React from "react";
 import { makeStyles } from "@material-ui/core/styles";
-import Content from "../Main/Content";
 import { Side } from "../Layout";
-import { Redirect, useHistory } from "react-router-dom";
-import axios from "axios";
+import { useHistory } from "react-router-dom";
 import Fab from "@material-ui/core/Fab";
 import AddIcon from "@material-ui/icons/Add";
 import clsx from "clsx";
-import CircularProgress from "@material-ui/core/CircularProgress";
 import { Container, Typography, useMediaQuery } from "@material-ui/core";
 import AccountCircleSharpIcon from "@material-ui/icons/AccountCircleSharp";
 
