@@ -8,12 +8,7 @@ import Fab from "@material-ui/core/Fab";
 import AddIcon from "@material-ui/icons/Add";
 import clsx from "clsx";
 import CircularProgress from "@material-ui/core/CircularProgress";
-import {
-  Button,
-  Container,
-  Typography,
-  useMediaQuery,
-} from "@material-ui/core";
+import { Container, Typography, useMediaQuery } from "@material-ui/core";
 import ImportContactsRoundedIcon from "@material-ui/icons/ImportContactsRounded";
 
 function Main({ token }) {
