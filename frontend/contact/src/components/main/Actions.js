@@ -42,7 +42,7 @@ function Actions({ fav, Contacts, token, id }) {
       if (contact.id === id) {
         axios({
           method: "PATCH",
-          url: `http://rexo.pythonanywhere.com/api/contacts/${id}/fav/`,
+          url: `//rexo.pythonanywhere.com/api/contacts/${id}/fav/`,
           data: contact,
           headers: {
             "content-type": "application/json",
@@ -57,7 +57,7 @@ function Actions({ fav, Contacts, token, id }) {
   //   e.preventDefault();
   //   axios({
   //     method: "DELETE",
-  //     url: `http://rexo.pythonanywhere.com/api/contacts/${id}/delete/`,
+  //     url: `//rexo.pythonanywhere.com/api/contacts/${id}/delete/`,
   //     headers: {
   //       "content-type": "application/json",
   //       Authorization: `Token ${token}`,

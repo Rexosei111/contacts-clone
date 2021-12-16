@@ -23,7 +23,7 @@ function MoreMenu({ id, Contacts, handleContacts, token }) {
     handleClose(e);
     axios({
       method: "DELETE",
-      url: `http://rexo.pythonanywhere.com/api/contacts/${id}/delete/`,
+      url: `//rexo.pythonanywhere.com/api/contacts/${id}/delete/`,
       headers: {
         "content-type": "application/json",
         Authorization: `Token ${token}`,

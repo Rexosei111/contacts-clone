@@ -101,7 +101,7 @@ function NewContact(props) {
   const handleSubmit = (e) => {
     axios({
       method: "post",
-      url: "http://rexo.pythonanywhere.com/api/contacts/create/",
+      url: "//rexo.pythonanywhere.com/api/contacts/create/",
       data: { ...contact, imageURL: imageURL },
       headers: {
         Authorization: `Token ${props.token}`,

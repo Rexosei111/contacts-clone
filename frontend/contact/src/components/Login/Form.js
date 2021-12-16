@@ -72,7 +72,7 @@ function Form({ setToken }) {
       // form.append("password", values.Password)
       const form = { username: values.Email, password: values.Password };
       const { data } = await axios.post(
-        "http://rexo.pythonanywhere.com/api/login/",
+        "//rexo.pythonanywhere.com/api/login/",
         form
       );
       const { token, email } = data;

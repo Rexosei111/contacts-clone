@@ -101,7 +101,7 @@ function RegistrationForm({ setToken }) {
       };
       axios({
         method: "POST",
-        url: "http://rexo.pythonanywhere.com/api/register/",
+        url: "//rexo.pythonanywhere.com/api/register/",
         data: form,
       })
         .then((response) => history.push("/login"))
